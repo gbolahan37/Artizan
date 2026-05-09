@@ -1,0 +1,172 @@
+/* ══════════════════════════════════════════
+   ARTIZAN — DESIGN SYSTEM (style.css)
+   Shared variables, resets, base styles
+══════════════════════════════════════════ */
+
+:root {
+  /* Brand colours */
+  --brand-purple: #4F46E5;
+  --brand-purple-dark: #3730A3;
+  --brand-purple-light: #EEF2FF;
+  --brand-green: #059669;
+  --brand-green-dark: #047857;
+  --brand-green-light: #ECFDF5;
+
+  /* Neutrals */
+  --ink-900: #0F0F10;
+  --ink-800: #1C1C1E;
+  --ink-700: #2C2C2E;
+  --ink-600: #48484A;
+  --ink-500: #636366;
+  --ink-400: #8E8E93;
+  --ink-300: #C7C7CC;
+  --ink-200: #E5E5EA;
+  --ink-100: #F2F2F7;
+  --ink-50:  #FAFAFA;
+  --white:   #FFFFFF;
+
+  /* Semantic */
+  --text-primary:   var(--ink-900);
+  --text-secondary: var(--ink-600);
+  --text-muted:     var(--ink-400);
+  --border:         var(--ink-200);
+  --border-strong:  var(--ink-300);
+  --surface:        var(--white);
+  --surface-raised: var(--ink-50);
+
+  /* Trust colours */
+  --trust-high-bg:    #ECFDF5;
+  --trust-high-color: #065F46;
+  --trust-mid-bg:     #FFFBEB;
+  --trust-mid-color:  #92400E;
+  --trust-low-bg:     #F9FAFB;
+  --trust-low-color:  #6B7280;
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+  --radius-full: 999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-xl:  0 24px 64px rgba(0,0,0,0.16);
+
+  /* Transitions */
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--white);
+  overflow-x: hidden;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+ul, ol { list-style: none; }
+input, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Section headers */
+.section-header { text-align: center; margin-bottom: 52px; }
+.section-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-purple);
+  margin-bottom: 12px;
+}
+.section-label.light { color: rgba(255,255,255,0.7); }
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.section-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--brand-purple);
+}
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Shared buttons */
+.btn-primary-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  background: var(--brand-purple);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: background 0.2s var(--ease), transform 0.15s var(--ease);
+}
+.btn-primary-sm:hover { background: var(--brand-purple-dark); transform: translateY(-1px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--brand-purple); color: var(--brand-purple); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink-100); }
+::-webkit-scrollbar-thumb { background: var(--ink-300); border-radius: 3px; }
+
+/* Utility */
+.hidden { display: none !important; }

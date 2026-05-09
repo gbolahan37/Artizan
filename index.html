@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artizan — Find Verified Skilled Artisans Near You in Lagos</title>
+  <meta name="description" content="Book verified plumbers, tailors, cleaners, electricians, babysitters and more near you in Lagos. Secure payments. Trusted professionals."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/index.css"/>
+</head>
+<body>
+
+<!--NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="logo-mark" src="assets/img/Screenshot_2026-05-09_121250-removebg-preview.png" alt="">
+      <span class="logo-text">Artizan</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#categories">Services</a></li>
+      <li><a href="#trust">Why Artizan</a></li>
+      <li><a href="discover.html">Browse Artisans</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="artisan-login.html" class="btn-ghost">Join as Artisan</a>
+      <a href="customer-login.html" class="btn-primary-sm">Sign In</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#how-it-works" onclick="closeMobile()">How it works</a>
+  <a href="#categories" onclick="closeMobile()">Services</a>
+  <a href="#trust" onclick="closeMobile()">Why Artizan</a>
+  <a href="discover.html" onclick="closeMobile()">Browse Artisans</a>
+  <a href="artisan-login.html" onclick="closeMobile()">Join as Artisan</a>
+  <a href="customer-login.html" class="mobile-cta" onclick="closeMobile()">Sign In</a>
+</div>
+
+<!--  HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>500+ verified artisans in Lagos</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Find skilled hands
+        <em>near you,</em>
+        <span class="headline-line">right now.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Book verified plumbers, tailors, cleaners, electricians, babysitters and more —
+        with your payment protected until the job is done.
+      </p>
+
+      <div class="hero-search">
+        <div class="search-box">
+          <div class="search-field">
+            <i class="fa fa-screwdriver-wrench search-icon"></i>
+            <select id="skill-select" class="search-input search-select">
+              <option value="" disabled selected>What do you need?</option>
+              <option value="home-repair">Home Repair</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="electrical">Electrical Work</option>
+              <option value="tailoring">Tailoring</option>
+              <option value="carpentry">Carpentry</option>
+              <option value="painting">Painting</option>
+              <option value="cleaning">Home Cleaning</option>
+              <option value="laundry">Laundry</option>
+              <option value="babysitting">Babysitting</option>
+              <option value="elder-care">Elder Care</option>
+              <option value="security">Security</option>
+              <option value="tutoring">Private Tutoring</option>
+            </select>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-field">
+            <i class="fa fa-location-dot search-icon"></i>
+            <input type="text" id="location-input" class="search-input" placeholder="Your location in Lagos"/>
+            <button class="locate-btn" id="locate-btn" title="Use my location">
+              <i class="fa fa-crosshairs"></i>
+            </button>
+          </div>
+          <button class="search-btn" id="search-btn">
+            <i class="fa fa-magnifying-glass"></i>
+            <span>Find Artisans</span>
+          </button>
+        </div>
+        <div class="search-popular">
+          <span>Popular:</span>
+          <a href="discover.html?skill=plumbing">Plumber</a>
+          <a href="discover.html?skill=cleaning">Cleaner</a>
+          <a href="discover.html?skill=tailoring">Tailor</a>
+          <a href="discover.html?skill=electrical">Electrician</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong class="stat-num" data-target="500">0</strong><span>+</span>
+          <p>Verified artisans</p>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="hero-stat">
+          <strong class="stat-num" data-target="12000">0</strong><span>+</span>
+          <p>Bookings completed</p>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="hero-stat">
+          <strong class="stat-num" data-target="98">0</strong><span>%</span>
+          <p>Satisfaction rate</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="visual-card main-card">
+        <div class="card-top">
+          <div class="artisan-avatar av-1">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="artisan-info">
+            <p class="artisan-name">Emeka Okafor</p>
+            <p class="artisan-skill">⚡ Electrician · Lekki</p>
+          </div>
+          <div class="trust-badge trust-high">
+            <i class="fa fa-shield-halved"></i> Highly Trusted
+          </div>
+        </div>
+        <div class="card-rating">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+          <i class="fa fa-star"></i><i class="fa fa-star"></i>
+          <span>4.9 (127 reviews)</span>
+        </div>
+        <div class="card-meta">
+          <span><i class="fa fa-location-dot"></i> 1.2km away</span>
+          <span><i class="fa fa-naira-sign"></i> From ₦8,000/job</span>
+        </div>
+        <button class="card-btn">Book Now</button>
+      </div>
+
+      <div class="visual-card float-card fc-1">
+        <i class="fa fa-circle-check fc-icon green"></i>
+        <div>
+          <p class="fc-title">Payment Protected</p>
+          <p class="fc-sub">Held in escrow until done</p>
+        </div>
+      </div>
+
+      <div class="visual-card float-card fc-2">
+        <i class="fa fa-map-pin fc-icon purple"></i>
+        <div>
+          <p class="fc-title">23 artisans nearby</p>
+          <p class="fc-sub">Available in your area now</p>
+        </div>
+      </div>
+
+      <div class="visual-card float-card fc-3">
+        <div class="fc-stars">
+          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+          <i class="fa fa-star"></i><i class="fa fa-star"></i>
+        </div>
+        <p class="fc-review">"Fixed my pipe in 45 mins. Brilliant!"</p>
+        <p class="fc-reviewer">— Tunde A., Surulere</p>
+      </div>
+
+      <div class="visual-badge vb-kyc">
+        <i class="fa fa-id-card"></i> KYC Verified
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">What can we help with?</p>
+      <h2 class="section-title">12 skilled service categories</h2>
+      <p class="section-sub">Every artisan is background-checked, KYC verified, and rated by real customers.</p>
+    </div>
+
+    <div class="categories-grid">
+      <a href="discover.html?skill=home-repair" class="cat-card" style="--cat-color:#E85D04;--cat-bg:#FFF4ED">
+        <div class="cat-icon"><i class="fa fa-hammer"></i></div>
+        <h3>Home Repair</h3>
+        <p>Leaking roofs, cracked walls, broken doors</p>
+        <span class="cat-count">47 artisans</span>
+      </a>
+      <a href="discover.html?skill=plumbing" class="cat-card" style="--cat-color:#0077B6;--cat-bg:#EFF8FF">
+        <div class="cat-icon"><i class="fa fa-wrench"></i></div>
+        <h3>Plumbing</h3>
+        <p>Pipe repairs, installations, drainage</p>
+        <span class="cat-count">38 artisans</span>
+      </a>
+      <a href="discover.html?skill=electrical" class="cat-card" style="--cat-color:#F4A261;--cat-bg:#FFFBF0">
+        <div class="cat-icon"><i class="fa fa-bolt"></i></div>
+        <h3>Electrical</h3>
+        <p>Wiring, installations, fault finding</p>
+        <span class="cat-count">52 artisans</span>
+      </a>
+      <a href="discover.html?skill=tailoring" class="cat-card" style="--cat-color:#7B2D8B;--cat-bg:#FAF0FC">
+        <div class="cat-icon"><i class="fa fa-scissors"></i></div>
+        <h3>Tailoring</h3>
+        <p>Custom outfits, alterations, repairs</p>
+        <span class="cat-count">63 artisans</span>
+      </a>
+      <a href="discover.html?skill=carpentry" class="cat-card" style="--cat-color:#6D4C41;--cat-bg:#FBF5F0">
+        <div class="cat-icon"><i class="fa fa-toolbox"></i></div>
+        <h3>Carpentry</h3>
+        <p>Furniture, installations, woodwork</p>
+        <span class="cat-count">29 artisans</span>
+      </a>
+      <a href="discover.html?skill=painting" class="cat-card" style="--cat-color:#E63946;--cat-bg:#FFF0F1">
+        <div class="cat-icon"><i class="fa fa-paint-roller"></i></div>
+        <h3>Painting</h3>
+        <p>Interior, exterior, decorative</p>
+        <span class="cat-count">34 artisans</span>
+      </a>
+      <a href="discover.html?skill=cleaning" class="cat-card" style="--cat-color:#2DC653;--cat-bg:#F0FFF4">
+        <div class="cat-icon"><i class="fa fa-broom"></i></div>
+        <h3>Home Cleaning</h3>
+        <p>Deep clean, regular, move-in/out</p>
+        <span class="cat-count">71 artisans</span>
+      </a>
+      <a href="discover.html?skill=laundry" class="cat-card" style="--cat-color:#48CAE4;--cat-bg:#F0FBFF">
+        <div class="cat-icon"><i class="fa fa-shirt"></i></div>
+        <h3>Laundry</h3>
+        <p>Wash, iron, dry-clean pickup</p>
+        <span class="cat-count">44 artisans</span>
+      </a>
+      <a href="discover.html?skill=babysitting" class="cat-card" style="--cat-color:#FF6B9D;--cat-bg:#FFF0F6">
+        <div class="cat-icon"><i class="fa fa-baby"></i></div>
+        <h3>Babysitting</h3>
+        <p>Trusted, verified childminders</p>
+        <span class="cat-count">28 artisans</span>
+      </a>
+      <a href="discover.html?skill=elder-care" class="cat-card" style="--cat-color:#4361EE;--cat-bg:#EFF2FF">
+        <div class="cat-icon"><i class="fa fa-heart-pulse"></i></div>
+        <h3>Elder Care</h3>
+        <p>Compassionate home support</p>
+        <span class="cat-count">19 artisans</span>
+      </a>
+      <a href="discover.html?skill=security" class="cat-card" style="--cat-color:#2B2D42;--cat-bg:#F5F5F7">
+        <div class="cat-icon"><i class="fa fa-shield-halved"></i></div>
+        <h3>Security</h3>
+        <p>Guards, escorts, event security</p>
+        <span class="cat-count">22 artisans</span>
+      </a>
+      <a href="discover.html?skill=tutoring" class="cat-card" style="--cat-color:#F9C74F;--cat-bg:#FFFDF0">
+        <div class="cat-icon"><i class="fa fa-book-open"></i></div>
+        <h3>Private Tutoring</h3>
+        <p>All subjects, all levels</p>
+        <span class="cat-count">57 artisans</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header light">
+      <p class="section-label">Simple & transparent</p>
+      <h2 class="section-title">How Artizan works</h2>
+    </div>
+
+    <div class="hiw-tabs">
+      <button class="hiw-tab active" data-tab="customer">For Customers</button>
+      <button class="hiw-tab" data-tab="artisan">For Artisans</button>
+    </div>
+
+    <div class="hiw-content" id="hiw-customer">
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <div class="step-num">01</div>
+          <div class="step-icon"><i class="fa fa-magnifying-glass"></i></div>
+          <h3>Search & Discover</h3>
+          <p>Enter your location and the skill you need. See verified artisans on a live map near you, ranked by our SkillScore algorithm.</p>
+        </div>
+        <div class="hiw-arrow"><i class="fa fa-arrow-right"></i></div>
+        <div class="hiw-step">
+          <div class="step-num">02</div>
+          <div class="step-icon"><i class="fa fa-calendar-check"></i></div>
+          <h3>Book & Pay Safely</h3>
+          <p>Choose an artisan, pick an available time slot, describe your job, and pay. Your money is held safely in escrow — not released until you're satisfied.</p>
+        </div>
+        <div class="hiw-arrow"><i class="fa fa-arrow-right"></i></div>
+        <div class="hiw-step">
+          <div class="step-num">03</div>
+          <div class="step-icon"><i class="fa fa-circle-check"></i></div>
+          <h3>Job Done. You Decide.</h3>
+          <p>The artisan completes your job. You confirm it's done to your satisfaction, then payment is released. Simple, safe, transparent.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hiw-content hidden" id="hiw-artisan">
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <div class="step-num">01</div>
+          <div class="step-icon artisan-icon"><i class="fa fa-id-card"></i></div>
+          <h3>Sign Up & Get Verified</h3>
+          <p>Create your profile, upload your government ID, set your skill category, rates, and service area. KYC review takes 24–48 hours.</p>
+        </div>
+        <div class="hiw-arrow"><i class="fa fa-arrow-right"></i></div>
+        <div class="hiw-step">
+          <div class="step-num">02</div>
+          <div class="step-icon artisan-icon"><i class="fa fa-bell"></i></div>
+          <h3>Receive Bookings</h3>
+          <p>Go online to appear on the map. Customers book you directly. We send you an instant SMS notification — even without mobile data.</p>
+        </div>
+        <div class="hiw-arrow"><i class="fa fa-arrow-right"></i></div>
+        <div class="hiw-step">
+          <div class="step-num">03</div>
+          <div class="step-icon artisan-icon"><i class="fa fa-naira-sign"></i></div>
+          <h3>Do the Work. Get Paid.</h3>
+          <p>Complete the job, upload your proof photo. Once the customer confirms, payment is released directly to your account. No delays.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED ARTISANS-->
+<section class="featured" id="featured">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Real people, real skills</p>
+      <h2 class="section-title">Top artisans this week</h2>
+      <p class="section-sub">All verified by our team. Rated by customers just like you.</p>
+    </div>
+
+    <div class="artisans-grid" id="artisans-grid">
+      <!-- Populated by JS or shown as demo cards -->
+      <div class="artisan-card" data-aos="fade-up">
+        <div class="ac-header">
+          <div class="ac-avatar av-orange"><i class="fa fa-user"></i></div>
+          <div class="ac-trust trust-high"><i class="fa fa-shield-halved"></i> Highly Trusted</div>
+        </div>
+        <h3 class="ac-name">Chukwudi Nwosu</h3>
+        <p class="ac-skill"><i class="fa fa-wrench"></i> Plumber · Victoria Island</p>
+        <div class="ac-rating">
+          <div class="stars">★★★★★</div>
+          <span>4.9 <em>(203 jobs)</em></span>
+        </div>
+        <div class="ac-meta">
+          <span><i class="fa fa-location-dot"></i> 0.6km away</span>
+          <span><i class="fa fa-naira-sign"></i> From ₦6,500</span>
+        </div>
+        <div class="ac-skills-tags">
+          <span>Pipe repair</span><span>Installation</span><span>Drainage</span>
+        </div>
+        <a href="artisan-profile.html" class="ac-btn">View Profile & Book</a>
+      </div>
+
+      <div class="artisan-card" data-aos="fade-up" style="animation-delay:.1s">
+        <div class="ac-header">
+          <div class="ac-avatar av-purple"><i class="fa fa-user"></i></div>
+          <div class="ac-trust trust-high"><i class="fa fa-shield-halved"></i> Highly Trusted</div>
+        </div>
+        <h3 class="ac-name">Aisha Bello</h3>
+        <p class="ac-skill"><i class="fa fa-scissors"></i> Tailor · Surulere</p>
+        <div class="ac-rating">
+          <div class="stars">★★★★★</div>
+          <span>4.8 <em>(156 jobs)</em></span>
+        </div>
+        <div class="ac-meta">
+          <span><i class="fa fa-location-dot"></i> 1.4km away</span>
+          <span><i class="fa fa-naira-sign"></i> From ₦4,000</span>
+        </div>
+        <div class="ac-skills-tags">
+          <span>Ankara</span><span>Lace</span><span>Alterations</span>
+        </div>
+        <a href="artisan-profile.html" class="ac-btn">View Profile & Book</a>
+      </div>
+
+      <div class="artisan-card" data-aos="fade-up" style="animation-delay:.2s">
+        <div class="ac-header">
+          <div class="ac-avatar av-green"><i class="fa fa-user"></i></div>
+          <div class="ac-trust trust-mid"><i class="fa fa-shield-halved"></i> Trusted</div>
+        </div>
+        <h3 class="ac-name">Tayo Adeyemi</h3>
+        <p class="ac-skill"><i class="fa fa-broom"></i> Cleaner · Lekki</p>
+        <div class="ac-rating">
+          <div class="stars">★★★★☆</div>
+          <span>4.7 <em>(89 jobs)</em></span>
+        </div>
+        <div class="ac-meta">
+          <span><i class="fa fa-location-dot"></i> 2.1km away</span>
+          <span><i class="fa fa-naira-sign"></i> From ₦7,000</span>
+        </div>
+        <div class="ac-skills-tags">
+          <span>Deep clean</span><span>Move-in</span><span>Office</span>
+        </div>
+        <a href="artisan-profile.html" class="ac-btn">View Profile & Book</a>
+      </div>
+
+      <div class="artisan-card" data-aos="fade-up" style="animation-delay:.3s">
+        <div class="ac-header">
+          <div class="ac-avatar av-blue"><i class="fa fa-user"></i></div>
+          <div class="ac-trust trust-high"><i class="fa fa-shield-halved"></i> Highly Trusted</div>
+        </div>
+        <h3 class="ac-name">Emeka Okafor</h3>
+        <p class="ac-skill"><i class="fa fa-bolt"></i> Electrician · Ikeja</p>
+        <div class="ac-rating">
+          <div class="stars">★★★★★</div>
+          <span>4.9 <em>(312 jobs)</em></span>
+        </div>
+        <div class="ac-meta">
+          <span><i class="fa fa-location-dot"></i> 3.2km away</span>
+          <span><i class="fa fa-naira-sign"></i> From ₦8,000</span>
+        </div>
+        <div class="ac-skills-tags">
+          <span>Wiring</span><span>Inverter</span><span>Generator</span>
+        </div>
+        <a href="artisan-profile.html" class="ac-btn">View Profile & Book</a>
+      </div>
+    </div>
+
+    <div class="featured-cta">
+      <a href="discover.html" class="btn-outline-lg">
+        <i class="fa fa-map"></i> Browse all artisans near you
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST SECTION -->
+<section class="trust-section" id="trust">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-content">
+        <p class="section-label light">Built for safety</p>
+        <h2 class="trust-title">Your safety is our<br/><em>first priority.</em></h2>
+        <p class="trust-body">We built Artizan because we know how risky it can be to invite a stranger into your home. Every feature — from KYC verification to escrow payment — exists to protect you.</p>
+
+        <div class="trust-features">
+          <div class="trust-feat">
+            <div class="tf-icon"><i class="fa fa-id-card"></i></div>
+            <div>
+              <h4>Government ID Verified</h4>
+              <p>Every artisan uploads their NIN, Voter's Card, or Driver's Licence. We verify before they go live.</p>
+            </div>
+          </div>
+          <div class="trust-feat">
+            <div class="tf-icon"><i class="fa fa-lock"></i></div>
+            <div>
+              <h4>Escrow Payment Protection</h4>
+              <p>Your money is held securely by Paystack. It's only released when you confirm the job is done right.</p>
+            </div>
+          </div>
+          <div class="trust-feat">
+            <div class="tf-icon"><i class="fa fa-star"></i></div>
+            <div>
+              <h4>TrustScore System</h4>
+              <p>Every artisan has a live TrustScore combining their KYC status, ratings, and completion rate.</p>
+            </div>
+          </div>
+          <div class="trust-feat">
+            <div class="tf-icon"><i class="fa fa-headset"></i></div>
+            <div>
+              <h4>Dispute Resolution</h4>
+              <p>If anything goes wrong, our team steps in. You can raise a dispute and we'll investigate fairly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-visual">
+        <div class="ts-card ts-main">
+          <div class="ts-header">
+            <span class="ts-label">TrustScore Breakdown</span>
+            <span class="ts-score">94<small>/100</small></span>
+          </div>
+          <div class="ts-bars">
+            <div class="ts-bar-row">
+              <span>KYC Verified</span>
+              <div class="ts-bar"><div class="ts-fill" style="width:100%;background:#2DC653"></div></div>
+              <span class="ts-pts">30/30</span>
+            </div>
+            <div class="ts-bar-row">
+              <span>Customer Rating</span>
+              <div class="ts-bar"><div class="ts-fill" style="width:96%;background:#4361EE"></div></div>
+              <span class="ts-pts">28.8/30</span>
+            </div>
+            <div class="ts-bar-row">
+              <span>Completion Rate</span>
+              <div class="ts-bar"><div class="ts-fill" style="width:95%;background:#7B2D8B"></div></div>
+              <span class="ts-pts">23.75/25</span>
+            </div>
+            <div class="ts-bar-row">
+              <span>Account Tenure</span>
+              <div class="ts-bar"><div class="ts-fill" style="width:80%;background:#F4A261"></div></div>
+              <span class="ts-pts">12/15</span>
+            </div>
+          </div>
+          <div class="ts-badge-row">
+            <div class="ts-badge-big"><i class="fa fa-shield-halved"></i> Highly Trusted Artisan</div>
+          </div>
+        </div>
+
+        <div class="ts-float f1">
+          <i class="fa fa-lock" style="color:#2DC653"></i>
+          <span>Escrow Active</span>
+        </div>
+        <div class="ts-float f2">
+          <i class="fa fa-check" style="color:#4361EE"></i>
+          <span>KYC Confirmed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Real stories</p>
+      <h2 class="section-title">What Lagos says about Artizan</h2>
+    </div>
+
+    <div class="testimonials-track" id="testimonials-track">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I found a plumber in 10 minutes. He fixed my burst pipe the same day. The escrow payment gave me real peace of mind — I wasn't going to lose money if he didn't show up."</p>
+        <div class="testi-author">
+          <div class="testi-avatar ta-blue">F</div>
+          <div>
+            <strong>Folake Adeyemi</strong>
+            <p>Lekki Phase 1</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"As an electrician, I used to spend weeks without a new client. Since joining Artizan I get 3–4 bookings a week. The SMS alert is the best part — I never miss a job even when my data finishes."</p>
+        <div class="testi-author">
+          <div class="testi-avatar ta-green">K</div>
+          <div>
+            <strong>Kingsley Eze</strong>
+            <p>Electrician · Surulere</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The tailor I found on Artizan is now my permanent tailor. She did my aso-ebi for my wedding. Her portfolio photos on the app are exactly what sold me — I knew exactly what I was getting."</p>
+        <div class="testi-author">
+          <div class="testi-avatar ta-purple">A</div>
+          <div>
+            <strong>Adaeze Obi</strong>
+            <p>Victoria Island</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Before Artizan I was paying ₦2,000 to a mechanic who recommended my neighbour's brother. Now I see ratings, I see the work they've done, I can compare prices. This is how it should work."</p>
+        <div class="testi-author">
+          <div class="testi-avatar ta-orange">B</div>
+          <div>
+            <strong>Babatunde Ogunleye</strong>
+            <p>Ikeja</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-controls">
+      <button class="testi-btn" id="testi-prev"><i class="fa fa-chevron-left"></i></button>
+      <div class="testi-dots" id="testi-dots"></div>
+      <button class="testi-btn" id="testi-next"><i class="fa fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISAN CTA -->
+<section class="artisan-cta">
+  <div class="container">
+    <div class="acta-inner">
+      <div class="acta-content">
+        <p class="section-label light">For skilled professionals</p>
+        <h2>Turn your skills into<br/><em>steady income.</em></h2>
+        <p>Join 500+ verified artisans already earning on Artizan. Set your own rates, manage your own schedule, get paid securely.</p>
+        <ul class="acta-perks">
+          <li><i class="fa fa-check-circle"></i> Free to join — no monthly fees</li>
+          <li><i class="fa fa-check-circle"></i> Get bookings from customers near you</li>
+          <li><i class="fa fa-check-circle"></i> SMS alerts so you never miss a job</li>
+          <li><i class="fa fa-check-circle"></i> Secure payments, always on time</li>
+          <li><i class="fa fa-check-circle"></i> Build your reputation with every review</li>
+        </ul>
+        <a href="artisan-signup.html" class="btn-artisan">
+          <i class="fa fa-arrow-right"></i> Join as an Artisan
+        </a>
+      </div>
+      <div class="acta-visual">
+        <div class="earnings-card">
+          <p class="ec-label">Top earner this month</p>
+          <div class="ec-amount">₦187,500</div>
+          <div class="ec-artisan">
+            <div class="ec-avatar"><i class="fa fa-user"></i></div>
+            <div>
+              <strong>Chukwudi N.</strong>
+              <p>Plumber · 31 jobs this month</p>
+            </div>
+          </div>
+          <div class="ec-chart">
+            <div class="ec-bar" style="height:40%"></div>
+            <div class="ec-bar" style="height:60%"></div>
+            <div class="ec-bar" style="height:45%"></div>
+            <div class="ec-bar" style="height:80%"></div>
+            <div class="ec-bar" style="height:65%"></div>
+            <div class="ec-bar" style="height:90%"></div>
+            <div class="ec-bar active" style="height:100%"></div>
+          </div>
+          <p class="ec-foot">Weekly earnings — growing steadily</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--FOOTER-->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-mark">A</span>
+          <span class="logo-text">Artizan</span>
+        </a>
+        <p>Connecting Lagos with verified skilled professionals. Safe, transparent, and always nearby.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>For Customers</h4>
+        <ul>
+          <li><a href="discover.html">Find an Artisan</a></li>
+          <li><a href="customer-signup.html">Create Account</a></li>
+          <li><a href="customer-login.html">Sign In</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Artisans</h4>
+        <ul>
+          <li><a href="artisan-signup.html">Join Artizan</a></li>
+          <li><a href="artisan-login.html">Artisan Login</a></li>
+          <li><a href="#trust">KYC Verification</a></li>
+          <li><a href="#">Earnings Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">NDPR Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Artizan Technologies Ltd. All rights reserved. Lagos, Nigeria.</p>
+      <p class="footer-ndpr">Artizan processes personal data in accordance with the Nigeria Data Protection Regulation (NDPR) 2019.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Artisans Near You — Artizan Lagos</title>
+  <meta name="description" content="Browse verified skilled artisans near you on a live map. Filter by skill, distance, and availability. Book instantly."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/discover.css"/>
+  <!-- Google Maps — replace YOUR_KEY with actual API key -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places,geometry&callback=initMap" async defer></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     TOP SEARCH BAR
+══════════════════════════════════════════ -->
+<header class="discover-header">
+  <div class="dh-inner">
+    <a href="index.html" class="nav-logo dh-logo">
+      <span class="logo-mark">A</span>
+      <span class="logo-text">Artizan</span>
+    </a>
+
+    <div class="dh-search">
+      <div class="dhs-field">
+        <i class="fa fa-screwdriver-wrench dhs-icon"></i>
+        <select id="skill-filter" class="dhs-input dhs-select">
+          <option value="">All Skills</option>
+          <option value="home-repair">Home Repair</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="electrical">Electrical</option>
+          <option value="tailoring">Tailoring</option>
+          <option value="carpentry">Carpentry</option>
+          <option value="painting">Painting</option>
+          <option value="cleaning">Home Cleaning</option>
+          <option value="laundry">Laundry</option>
+          <option value="babysitting">Babysitting</option>
+          <option value="elder-care">Elder Care</option>
+          <option value="security">Security</option>
+          <option value="tutoring">Private Tutoring</option>
+        </select>
+      </div>
+      <div class="dhs-sep"></div>
+      <div class="dhs-field dhs-location">
+        <i class="fa fa-location-dot dhs-icon"></i>
+        <input type="text" id="location-filter" class="dhs-input" placeholder="Location in Lagos"/>
+        <button class="dhs-locate" id="locate-btn" title="Use my location">
+          <i class="fa fa-crosshairs"></i>
+        </button>
+      </div>
+      <button class="dhs-btn" id="search-btn">
+        <i class="fa fa-magnifying-glass"></i> Search
+      </button>
+    </div>
+
+    <div class="dh-actions">
+      <a href="customer-login.html" class="btn-ghost">Sign In</a>
+      <a href="customer-signup.html" class="btn-primary-sm">Sign Up</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     FILTER BAR
+══════════════════════════════════════════ -->
+<div class="filter-bar">
+  <div class="filter-inner">
+
+    <!-- Radius -->
+    <div class="filter-group">
+      <label class="filter-label">Radius</label>
+      <div class="radius-slider-wrap">
+        <input type="range" id="radius-slider" min="2" max="20" value="10" step="1" class="radius-slider"/>
+        <span class="radius-val" id="radius-val">10 km</span>
+      </div>
+    </div>
+
+    <!-- Sort -->
+    <div class="filter-group">
+      <label class="filter-label">Sort by</label>
+      <div class="sort-pills">
+        <button class="sort-pill active" data-sort="skillscore">⚡ Best Match</button>
+        <button class="sort-pill" data-sort="nearest">📍 Nearest</button>
+        <button class="sort-pill" data-sort="rating">⭐ Top Rated</button>
+        <button class="sort-pill" data-sort="price">💰 Lowest Price</button>
+      </div>
+    </div>
+
+    <!-- Available now toggle -->
+    <div class="filter-group filter-group-right">
+      <label class="filter-label">Available now</label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="available-toggle"/>
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+      </label>
+    </div>
+
+    <!-- View toggle -->
+    <div class="view-toggle">
+      <button class="view-btn active" id="view-split" title="Split view">
+        <i class="fa fa-table-columns"></i>
+      </button>
+      <button class="view-btn" id="view-map" title="Map only">
+        <i class="fa fa-map"></i>
+      </button>
+      <button class="view-btn" id="view-list" title="List only">
+        <i class="fa fa-list"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN SPLIT LAYOUT
+══════════════════════════════════════════ -->
+<main class="discover-main" id="discover-main">
+
+  <!-- ── LEFT: ARTISAN LIST PANEL ── -->
+  <aside class="list-panel" id="list-panel">
+
+    <!-- Results summary -->
+    <div class="results-summary" id="results-summary">
+      <span class="results-count" id="results-count">Loading...</span>
+      <span class="results-area" id="results-area"></span>
+    </div>
+
+    <!-- Recommended row -->
+    <div class="recommended-section" id="recommended-section" style="display:none">
+      <div class="rec-header">
+        <span class="rec-badge"><i class="fa fa-bolt"></i> Recommended for you</span>
+        <span class="rec-sub">Ranked by SkillScore</span>
+      </div>
+      <div class="rec-cards" id="rec-cards"></div>
+    </div>
+
+    <!-- Divider -->
+    <div class="list-divider" id="list-divider" style="display:none">
+      <span>All artisans in area</span>
+    </div>
+
+    <!-- Main artisan list -->
+    <div class="artisan-list" id="artisan-list">
+      <!-- Skeleton loaders shown on load -->
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="empty-state" style="display:none">
+      <div class="empty-icon"><i class="fa fa-magnifying-glass"></i></div>
+      <h3>No artisans found</h3>
+      <p>Try expanding your search radius or selecting a different skill category.</p>
+      <button class="btn-primary-sm" onclick="expandRadius()">
+        <i class="fa fa-expand"></i> Expand radius to 20km
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ── RIGHT: MAP PANEL ── -->
+  <div class="map-panel" id="map-panel">
+    <div id="google-map" class="google-map"></div>
+
+    <!-- Map loading state -->
+    <div class="map-loading" id="map-loading">
+      <div class="map-spinner"></div>
+      <p>Loading map...</p>
+    </div>
+
+    <!-- Map controls overlay -->
+    <div class="map-controls">
+      <button class="map-ctrl-btn" id="my-location-btn" title="Centre on my location">
+        <i class="fa fa-location-crosshairs"></i>
+      </button>
+      <button class="map-ctrl-btn" id="zoom-in-btn" title="Zoom in">
+        <i class="fa fa-plus"></i>
+      </button>
+      <button class="map-ctrl-btn" id="zoom-out-btn" title="Zoom out">
+        <i class="fa fa-minus"></i>
+      </button>
+    </div>
+
+    <!-- Artisan count bubble on map -->
+    <div class="map-count-bubble" id="map-count-bubble">
+      <i class="fa fa-users"></i>
+      <span id="map-artisan-count">0</span> artisans visible
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════════════════════════════════
+     ARTISAN PREVIEW DRAWER (slides up on mobile / side on desktop)
+══════════════════════════════════════════ -->
+<div class="preview-drawer" id="preview-drawer">
+  <div class="drawer-handle"></div>
+  <button class="drawer-close" id="drawer-close"><i class="fa fa-xmark"></i></button>
+
+  <div class="drawer-content" id="drawer-content">
+    <!-- Populated by JS when a map pin or list card is clicked -->
+  </div>
+
+  <div class="drawer-actions">
+    <a href="#" class="drawer-btn-secondary" id="drawer-view-profile">
+      <i class="fa fa-user"></i> Full Profile
+    </a>
+    <a href="#" class="drawer-btn-primary" id="drawer-book-now">
+      <i class="fa fa-calendar-check"></i> Book Now
+    </a>
+  </div>
+</div>
+<div class="drawer-overlay" id="drawer-overlay"></div>
+
+<!-- ══════════════════════════════════════════
+     TEMPLATES (hidden, cloned by JS)
+══════════════════════════════════════════ -->
+
+<!-- Artisan list card template -->
+<template id="artisan-card-template">
+  <div class="a-card" data-id="">
+    <div class="a-card-left">
+      <div class="a-avatar"></div>
+      <div class="a-avail-dot" title="Available now"></div>
+    </div>
+    <div class="a-card-body">
+      <div class="a-card-top">
+        <div>
+          <h3 class="a-name"></h3>
+          <p class="a-skill"></p>
+        </div>
+        <div class="a-trust-badge"></div>
+      </div>
+      <div class="a-card-mid">
+        <div class="a-stars"></div>
+        <span class="a-rating-count"></span>
+        <span class="a-sep">·</span>
+        <span class="a-distance"><i class="fa fa-location-dot"></i> <span class="a-dist-val"></span></span>
+      </div>
+      <div class="a-card-bot">
+        <span class="a-price"><i class="fa fa-naira-sign"></i> <span class="a-price-val"></span></span>
+        <span class="a-completion"><i class="fa fa-circle-check"></i> <span class="a-comp-val"></span>% completion</span>
+      </div>
+    </div>
+    <button class="a-card-arrow"><i class="fa fa-chevron-right"></i></button>
+  </div>
+</template>
+
+<!-- Recommended card template -->
+<template id="rec-card-template">
+  <div class="rec-card" data-id="">
+    <div class="rec-card-top">
+      <div class="rec-avatar"></div>
+      <div class="rec-info">
+        <h4 class="rec-name"></h4>
+        <p class="rec-skill"></p>
+      </div>
+      <div class="rec-score">
+        <span class="rec-score-val"></span>
+        <span class="rec-score-label">SkillScore</span>
+      </div>
+    </div>
+    <div class="rec-card-bot">
+      <div class="rec-meta">
+        <span class="rec-rating"><span class="rec-stars"></span> <span class="rec-rating-val"></span></span>
+        <span class="rec-dist"><i class="fa fa-location-dot"></i> <span class="rec-dist-val"></span></span>
+        <span class="rec-price"><i class="fa fa-naira-sign"></i> <span class="rec-price-val"></span></span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- Preview drawer content template -->
+<template id="drawer-template">
+  <div class="dw-header">
+    <div class="dw-avatar"></div>
+    <div class="dw-info">
+      <h3 class="dw-name"></h3>
+      <p class="dw-skill"></p>
+      <div class="dw-trust"></div>
+    </div>
+  </div>
+  <div class="dw-stats">
+    <div class="dw-stat">
+      <strong class="dw-rating-val"></strong>
+      <span>Rating</span>
+    </div>
+    <div class="dw-stat">
+      <strong class="dw-jobs-val"></strong>
+      <span>Jobs done</span>
+    </div>
+    <div class="dw-stat">
+      <strong class="dw-dist-val"></strong>
+      <span>Away</span>
+    </div>
+    <div class="dw-stat">
+      <strong class="dw-price-val"></strong>
+      <span>From</span>
+    </div>
+  </div>
+  <div class="dw-trust-score">
+    <div class="dw-ts-bar">
+      <span>TrustScore</span>
+      <div class="dw-ts-track"><div class="dw-ts-fill"></div></div>
+      <span class="dw-ts-val"></span>
+    </div>
+  </div>
+  <div class="dw-portfolio" id="dw-portfolio">
+    <p class="dw-section-label">Recent work</p>
+    <div class="dw-portfolio-grid"></div>
+  </div>
+  <div class="dw-availability">
+    <p class="dw-section-label">Available</p>
+    <p class="dw-avail-text"></p>
+  </div>
+</template>
+
+<script src="assets/js/discover.js"></script>
+</body>
+</html>
