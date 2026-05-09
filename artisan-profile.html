@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chukwudi Nwosu — Plumber · Artizan Lagos</title>
+  <meta name="description" content="Book Chukwudi Nwosu, a Highly Trusted plumber in Victoria Island, Lagos. 4.9★ rating, 203 jobs completed. Secure escrow payment."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/artisan-profile.css"/>
+</head>
+<body>
+
+<!-- STICKY NAVBAR -->
+<nav class="ap-nav" id="ap-nav">
+  <div class="ap-nav-inner">
+    <a href="discover.html" class="ap-back">
+      <i class="fa fa-arrow-left"></i> <span>Back to results</span>
+    </a>
+    <a href="index.html" class="nav-logo ap-logo">
+      <span class="logo-mark">A</span>
+      <span class="logo-text">Artizan</span>
+    </a>
+    <div class="ap-nav-actions">
+      <button class="ap-share-btn" id="share-btn" title="Share profile">
+        <i class="fa fa-share-nodes"></i>
+      </button>
+      <button class="ap-save-btn" id="save-btn" title="Save artisan">
+        <i class="fa fa-bookmark"></i>
+      </button>
+      <a href="#book" class="ap-book-btn-nav" id="nav-book-btn">
+        Book Now
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!--
+     HERO HEADER -->
+<header class="profile-hero">
+  <div class="hero-backdrop">
+    <div class="backdrop-gradient"></div>
+    <div class="backdrop-pattern"></div>
+  </div>
+
+  <div class="profile-hero-inner container">
+    <!-- Left: Avatar + basic info -->
+    <div class="profile-identity">
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" id="profile-avatar">CN</div>
+        <div class="avail-indicator" id="avail-indicator">
+          <span class="avail-dot"></span>
+          <span class="avail-text">Available now</span>
+        </div>
+      </div>
+
+      <div class="profile-info">
+        <div class="profile-badges">
+          <span class="trust-badge-large">
+            <i class="fa fa-shield-halved"></i> Highly Trusted
+          </span>
+          <span class="kyc-badge">
+            <i class="fa fa-id-card"></i> KYC Verified
+          </span>
+        </div>
+
+        <h1 class="profile-name" id="profile-name">Chukwudi Nwosu</h1>
+
+        <div class="profile-skill-row">
+          <span class="skill-pill" id="profile-skill">
+            <i class="fa fa-wrench"></i> Plumber
+          </span>
+          <span class="profile-location">
+            <i class="fa fa-location-dot"></i>
+            <span id="profile-location">Victoria Island, Lagos</span>
+          </span>
+          <span class="profile-distance" id="profile-distance">
+            <i class="fa fa-person-walking"></i> 0.6km away
+          </span>
+        </div>
+
+        <div class="profile-quick-stats">
+          <div class="quick-stat">
+            <strong id="stat-rating">4.9</strong>
+            <div class="qs-stars" id="qs-stars">★★★★★</div>
+            <span>Rating</span>
+          </div>
+          <div class="qs-sep"></div>
+          <div class="quick-stat">
+            <strong id="stat-jobs">203</strong>
+            <span>Jobs done</span>
+          </div>
+          <div class="qs-sep"></div>
+          <div class="quick-stat">
+            <strong id="stat-completion">97%</strong>
+            <span>Completion</span>
+          </div>
+          <div class="qs-sep"></div>
+          <div class="quick-stat">
+            <strong id="stat-response">~45min</strong>
+            <span>Avg response</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Quick price card -->
+    <div class="profile-price-card">
+      <div class="price-from">Starting from</div>
+      <div class="price-amount" id="price-amount">
+        <i class="fa fa-naira-sign"></i><span>6,500</span>
+        <small>/ job</small>
+      </div>
+      <div class="price-escrow-note">
+        <i class="fa fa-lock"></i>
+        Payment held in escrow until job is done
+      </div>
+      <a href="#book" class="price-book-btn">
+        <i class="fa fa-calendar-check"></i> Check availability & book
+      </a>
+      <a href="#" class="price-message-btn" id="message-btn">
+        <i class="fa fa-comment"></i> Send a message first
+      </a>
+    </div>
+  </div>
+</header>
+
+<!--
+     STICKY SECTION NAV -->
+<nav class="section-nav" id="section-nav">
+  <div class="sn-inner container">
+    <a href="#about"     class="sn-link active" data-section="about">About</a>
+    <a href="#portfolio" class="sn-link" data-section="portfolio">Portfolio</a>
+    <a href="#trust"     class="sn-link" data-section="trust">TrustScore</a>
+    <a href="#book"      class="sn-link" data-section="book">Book</a>
+    <a href="#reviews"   class="sn-link" data-section="reviews">Reviews</a>
+  </div>
+</nav>
+
+<!--
+     MAIN CONTENT + STICKY BOOKING PANEL -->
+<div class="profile-body container">
+
+  <!-- ── LEFT COLUMN: CONTENT ── -->
+  <div class="profile-content">
+
+    <!-- ABOUT -->
+    <section class="ap-section" id="about">
+      <h2 class="ap-section-title">About Chukwudi</h2>
+      <div class="about-grid">
+        <div class="about-bio">
+          <p id="profile-bio">
+            I am a certified plumber with over 9 years of experience serving clients across Lagos Island, Victoria Island, and Lekki. I specialise in residential pipe installation, burst pipe repairs, bathroom plumbing, and drainage systems. I have worked on projects ranging from single-flat repairs to full plumbing installations for residential estates and commercial buildings.
+          </p>
+          <p>
+            I take pride in arriving on time, explaining the issue clearly before starting work, and cleaning up after every job. All my materials are sourced from trusted suppliers, and I offer a 30-day workmanship guarantee on all repairs. My customers know they can call me back if anything is not right.
+          </p>
+          <div class="bio-tags" id="bio-tags">
+            <span>Pipe Repair</span>
+            <span>Installation</span>
+            <span>Drainage</span>
+            <span>Bathroom Plumbing</span>
+            <span>Burst Pipes</span>
+            <span>Water Heaters</span>
+          </div>
+        </div>
+
+        <div class="about-details">
+          <div class="detail-item">
+            <div class="detail-icon"><i class="fa fa-briefcase"></i></div>
+            <div>
+              <p class="detail-label">Experience</p>
+              <p class="detail-val" id="detail-exp">9 years</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon"><i class="fa fa-map-location-dot"></i></div>
+            <div>
+              <p class="detail-label">Service areas</p>
+              <p class="detail-val" id="detail-zones">VI, Lekki, Lagos Island, Ikoyi, Ajah</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon"><i class="fa fa-clock"></i></div>
+            <div>
+              <p class="detail-label">Working hours</p>
+              <p class="detail-val">Mon – Sat, 7:00am – 7:00pm</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon"><i class="fa fa-language"></i></div>
+            <div>
+              <p class="detail-label">Languages</p>
+              <p class="detail-val">English, Igbo, Yoruba (basic)</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon"><i class="fa fa-certificate"></i></div>
+            <div>
+              <p class="detail-label">Certification</p>
+              <p class="detail-val">COREN Certified Plumber</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-icon"><i class="fa fa-shield-check"></i></div>
+            <div>
+              <p class="detail-label">Member since</p>
+              <p class="detail-val" id="detail-member">January 2023</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="ap-section" id="portfolio">
+      <div class="ap-section-header">
+        <h2 class="ap-section-title">Portfolio</h2>
+        <span class="ap-section-count" id="portfolio-count">8 photos</span>
+      </div>
+      <div class="portfolio-grid" id="portfolio-grid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- TRUST SCORE -->
+    <section class="ap-section trust-section-profile" id="trust">
+      <h2 class="ap-section-title">TrustScore Breakdown</h2>
+      <div class="trust-panel">
+        <div class="trust-score-display">
+          <div class="ts-ring-wrap">
+            <svg class="ts-ring" viewBox="0 0 120 120">
+              <circle class="ts-ring-bg" cx="60" cy="60" r="52" />
+              <circle class="ts-ring-fill" cx="60" cy="60" r="52" id="ts-ring-fill"/>
+            </svg>
+            <div class="ts-ring-inner">
+              <span class="ts-big-num" id="ts-big-num">94</span>
+              <span class="ts-big-label">/ 100</span>
+            </div>
+          </div>
+          <div class="ts-band-badge ts-band-high" id="ts-band-badge">
+            <i class="fa fa-shield-halved"></i> Highly Trusted
+          </div>
+          <p class="ts-description">
+            This artisan has been verified, maintains an excellent rating, completes nearly all bookings, and has been a reliable member of Artizan for over a year.
+          </p>
+        </div>
+
+        <div class="trust-components">
+          <div class="tc-item">
+            <div class="tc-header">
+              <div class="tc-icon tc-green"><i class="fa fa-id-card"></i></div>
+              <div>
+                <p class="tc-name">KYC Verified</p>
+                <p class="tc-desc">Government ID confirmed by our team</p>
+              </div>
+              <span class="tc-score">30/30</span>
+            </div>
+            <div class="tc-bar-wrap">
+              <div class="tc-bar"><div class="tc-fill" style="width:100%;background:#059669"></div></div>
+            </div>
+          </div>
+
+          <div class="tc-item">
+            <div class="tc-header">
+              <div class="tc-icon tc-blue"><i class="fa fa-star"></i></div>
+              <div>
+                <p class="tc-name">Customer Rating</p>
+                <p class="tc-desc">Average across 203 completed jobs</p>
+              </div>
+              <span class="tc-score" id="tc-rating-score">28.8/30</span>
+            </div>
+            <div class="tc-bar-wrap">
+              <div class="tc-bar"><div class="tc-fill" id="tc-rating-fill" style="width:96%;background:#4F46E5"></div></div>
+            </div>
+          </div>
+
+          <div class="tc-item">
+            <div class="tc-header">
+              <div class="tc-icon tc-purple"><i class="fa fa-circle-check"></i></div>
+              <div>
+                <p class="tc-name">Completion Rate</p>
+                <p class="tc-desc">Jobs accepted and successfully delivered</p>
+              </div>
+              <span class="tc-score" id="tc-comp-score">23.75/25</span>
+            </div>
+            <div class="tc-bar-wrap">
+              <div class="tc-bar"><div class="tc-fill" id="tc-comp-fill" style="width:95%;background:#7B2D8B"></div></div>
+            </div>
+          </div>
+
+          <div class="tc-item">
+            <div class="tc-header">
+              <div class="tc-icon tc-amber"><i class="fa fa-calendar"></i></div>
+              <div>
+                <p class="tc-name">Account Tenure</p>
+                <p class="tc-desc">Consistent member since January 2023</p>
+              </div>
+              <span class="tc-score" id="tc-tenure-score">11.5/15</span>
+            </div>
+            <div class="tc-bar-wrap">
+              <div class="tc-bar"><div class="tc-fill" id="tc-tenure-fill" style="width:77%;background:#D97706"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING FORM (anchor) -->
+    <section class="ap-section booking-section" id="book">
+      <h2 class="ap-section-title">Book Chukwudi</h2>
+      <div class="booking-form-wrap">
+        <form class="booking-form" id="booking-form" novalidate>
+
+          <div class="bf-step" id="bf-step-1">
+            <div class="bf-step-label"><span class="step-dot">1</span> Describe your job</div>
+            <div class="bf-field">
+              <label for="job-title">Job title</label>
+              <input type="text" id="job-title" class="bf-input" placeholder="e.g. Burst pipe repair in kitchen"/>
+            </div>
+            <div class="bf-field">
+              <label for="job-desc">Job description</label>
+              <textarea id="job-desc" class="bf-input bf-textarea" rows="3"
+                placeholder="Describe the problem in detail — what's broken, where it is, any relevant details..."></textarea>
+            </div>
+            <div class="bf-field">
+              <label for="job-address">Your address</label>
+              <div class="bf-input-wrap">
+                <i class="fa fa-location-dot bf-input-icon"></i>
+                <input type="text" id="job-address" class="bf-input bf-input-icon-left"
+                  placeholder="Full address where the job will take place"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="bf-step" id="bf-step-2">
+            <div class="bf-step-label"><span class="step-dot">2</span> Choose date & time</div>
+            <div class="calendar-wrap" id="calendar-wrap">
+              <!-- Calendar rendered by JS -->
+            </div>
+            <div class="time-slots" id="time-slots" style="display:none">
+              <p class="ts-label">Available times on <span id="selected-date-label"></span></p>
+              <div class="slots-grid" id="slots-grid"></div>
+            </div>
+          </div>
+
+          <div class="bf-step" id="bf-step-3">
+            <div class="bf-step-label"><span class="step-dot">3</span> Review & pay</div>
+            <div class="booking-summary" id="booking-summary">
+              <div class="bs-row">
+                <span>Artisan</span>
+                <span id="bs-artisan">Chukwudi Nwosu</span>
+              </div>
+              <div class="bs-row">
+                <span>Service</span>
+                <span id="bs-service">Plumbing</span>
+              </div>
+              <div class="bs-row">
+                <span>Date & Time</span>
+                <span id="bs-datetime">—</span>
+              </div>
+              <div class="bs-row">
+                <span>Location</span>
+                <span id="bs-location">—</span>
+              </div>
+              <div class="bs-divider"></div>
+              <div class="bs-row bs-total">
+                <span>Total (held in escrow)</span>
+                <span id="bs-total">₦6,500</span>
+              </div>
+              <div class="bs-escrow-note">
+                <i class="fa fa-lock"></i>
+                Your payment is held securely by Paystack and only released when you confirm the job is done to your satisfaction.
+              </div>
+            </div>
+          </div>
+
+          <div class="bf-error" id="bf-error"></div>
+
+          <button type="submit" class="bf-submit-btn" id="bf-submit">
+            <i class="fa fa-lock"></i>
+            <span id="bf-submit-text">Proceed to Secure Payment</span>
+          </button>
+
+          <p class="bf-terms">
+            By booking you agree to Artizan's <a href="#">Terms of Service</a> and <a href="#">Cancellation Policy</a>.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="ap-section" id="reviews">
+      <div class="ap-section-header">
+        <h2 class="ap-section-title">Customer Reviews</h2>
+        <div class="reviews-summary-pill">
+          <span class="rsp-stars">★★★★★</span>
+          <span class="rsp-score" id="rsp-score">4.9</span>
+          <span class="rsp-count" id="rsp-count">(203 reviews)</span>
+        </div>
+      </div>
+
+      <!-- Rating breakdown bars -->
+      <div class="rating-breakdown" id="rating-breakdown">
+        <div class="rb-row"><span>5★</span><div class="rb-bar"><div class="rb-fill" style="width:82%"></div></div><span>82%</span></div>
+        <div class="rb-row"><span>4★</span><div class="rb-bar"><div class="rb-fill rb-4" style="width:12%"></div></div><span>12%</span></div>
+        <div class="rb-row"><span>3★</span><div class="rb-bar"><div class="rb-fill rb-3" style="width:4%"></div></div><span>4%</span></div>
+        <div class="rb-row"><span>2★</span><div class="rb-bar"><div class="rb-fill rb-2" style="width:1%"></div></div><span>1%</span></div>
+        <div class="rb-row"><span>1★</span><div class="rb-bar"><div class="rb-fill rb-1" style="width:1%"></div></div><span>1%</span></div>
+      </div>
+
+      <!-- Review cards -->
+      <div class="reviews-list" id="reviews-list">
+        <!-- Populated by JS -->
+      </div>
+
+      <button class="load-more-reviews" id="load-more-reviews">
+        <i class="fa fa-chevron-down"></i> Load more reviews
+      </button>
+    </section>
+
+  </div>
+
+  <!-- ── RIGHT COLUMN: STICKY BOOKING PANEL (desktop) ── -->
+  <aside class="booking-sidebar" id="booking-sidebar">
+    <div class="bs-card">
+      <div class="bsc-price">
+        <span class="bsc-from">Starting from</span>
+        <div class="bsc-amount">
+          <i class="fa fa-naira-sign"></i>6,500 <small>/ job</small>
+        </div>
+      </div>
+
+      <div class="bsc-quick">
+        <div class="bsc-q-item">
+          <i class="fa fa-star" style="color:#F59E0B"></i>
+          <span><strong>4.9</strong> (203 reviews)</span>
+        </div>
+        <div class="bsc-q-item">
+          <i class="fa fa-circle-check" style="color:#059669"></i>
+          <span><strong>97%</strong> completion rate</span>
+        </div>
+        <div class="bsc-q-item">
+          <i class="fa fa-clock" style="color:#4F46E5"></i>
+          <span>Responds in <strong>~45 min</strong></span>
+        </div>
+      </div>
+
+      <a href="#book" class="bsc-book-btn">
+        <i class="fa fa-calendar-check"></i> Book Now
+      </a>
+      <button class="bsc-msg-btn" id="sidebar-msg-btn">
+        <i class="fa fa-comment"></i> Message Chukwudi
+      </button>
+
+      <div class="bsc-safety">
+        <div class="bsc-safe-item">
+          <i class="fa fa-shield-halved"></i>
+          <span>Highly Trusted artisan</span>
+        </div>
+        <div class="bsc-safe-item">
+          <i class="fa fa-lock"></i>
+          <span>Escrow payment protection</span>
+        </div>
+        <div class="bsc-safe-item">
+          <i class="fa fa-rotate-left"></i>
+          <span>Free cancellation (24h before)</span>
+        </div>
+        <div class="bsc-safe-item">
+          <i class="fa fa-headset"></i>
+          <span>Artizan dispute support</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!--
+     PORTFOLIO LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lb-close"><i class="fa fa-xmark"></i></button>
+  <button class="lb-prev" id="lb-prev"><i class="fa fa-chevron-left"></i></button>
+  <button class="lb-next" id="lb-next"><i class="fa fa-chevron-right"></i></button>
+  <div class="lb-content">
+    <div class="lb-img-wrap">
+      <div class="lb-img-placeholder" id="lb-img">
+        <i class="fa fa-image"></i>
+        <p id="lb-caption"></p>
+      </div>
+    </div>
+    <div class="lb-info">
+      <p class="lb-skill-tag" id="lb-skill-tag"></p>
+      <p class="lb-caption-full" id="lb-caption-full"></p>
+    </div>
+  </div>
+  <div class="lb-dots" id="lb-dots"></div>
+</div>
+<div class="lightbox-overlay" id="lightbox-overlay"></div>
+
+<!--
+     LOGIN PROMPT MODAL -->
+<div class="modal-overlay" id="login-modal-overlay" style="display:none">
+  <div class="login-modal">
+    <button class="modal-close" id="login-modal-close"><i class="fa fa-xmark"></i></button>
+    <div class="lm-icon"><i class="fa fa-lock"></i></div>
+    <h3>Sign in to book</h3>
+    <p>Create a free account or sign in to book Chukwudi and pay securely.</p>
+    <a href="customer-signup.html" class="lm-signup-btn">Create free account</a>
+    <a href="customer-login.html" class="lm-login-link">Already have an account? Sign in</a>
+  </div>
+</div>
+
+<!--
+     MOBILE BOTTOM BOOK BAR -->
+<div class="mobile-book-bar" id="mobile-book-bar">
+  <div class="mbb-price">
+    <span class="mbb-from">From</span>
+    <span class="mbb-amount"><i class="fa fa-naira-sign"></i>6,500</span>
+  </div>
+  <a href="#book" class="mbb-btn">Book Now</a>
+</div>
+
+<script src="assets/js/artisan-profile.js"></script>
+</body>
+</html>
