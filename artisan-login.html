@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artisan Sign In — Artizan Lagos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/auth.css"/>
+  <style>
+    .auth-left{background:linear-gradient(160deg,#052E16 0%,#065F46 45%,#047857 100%);}
+    .al-title em{color:#6EE7B7;}
+    .rs-tab.rs-active{color:var(--brand-green);}
+    .ar-submit-btn{background:var(--brand-green);}
+    .ar-submit-btn:hover{background:var(--brand-green-dark);}
+    .ar-btn-next{background:var(--brand-green);}
+    .ar-link{color:var(--brand-green);}
+    .al-trust-item i{color:#6EE7B7;}
+    .al-eyebrow,.al-sub{color:rgba(255,255,255,0.55);}
+    .al-stat>span:not(.al-stat-num){color:#6EE7B7;}
+    .kyc-banner{background:rgba(5,150,105,0.15);border:1px solid rgba(110,231,183,0.3);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;font-size:0.85rem;color:rgba(255,255,255,0.8);}
+    .kyc-banner i{color:#6EE7B7;flex-shrink:0;margin-top:2px;}
+  </style>
+</head>
+<body class="auth-body">
+<div class="auth-shell">
+  <div class="auth-left">
+    <div class="al-bg"><div class="al-blob b1" style="background:radial-gradient(circle,#059669,transparent 70%)"></div><div class="al-blob b2" style="background:radial-gradient(circle,#34D399,transparent 70%)"></div><div class="al-grid"></div></div>
+    <a href="index.html" class="al-logo"><span class="logo-mark" style="background:var(--brand-green)">A</span><span class="logo-text">Artizan</span></a>
+    <div class="al-headline">
+      <p class="al-eyebrow">Welcome back, artisan</p>
+      <h1 class="al-title">Your next booking<br/><em>is waiting.</em></h1>
+      <p class="al-sub">Log in to manage your bookings, update your availability, and track your earnings.</p>
+    </div>
+    <div class="al-stats">
+      <div class="al-stat"><span class="al-stat-num" data-target="187500">0</span><span>₦</span><p>Top earner/month</p></div>
+      <div class="al-stat-sep"></div>
+      <div class="al-stat"><span class="al-stat-num" data-target="500">0</span><span>+</span><p>Active artisans</p></div>
+      <div class="al-stat-sep"></div>
+      <div class="al-stat"><span class="al-stat-num" data-target="4">0</span><span>.9★</span><p>Avg rating</p></div>
+    </div>
+    <div class="al-testimonial" id="al-testimonial">
+      <div class="al-testi-quote">
+        <i class="fa fa-quote-left al-quote-icon"></i>
+        <p class="al-testi-text" id="al-testi-text">"Since joining Artizan I get 3–4 bookings a week. The SMS alert means I never miss a job even when my data finishes."</p>
+      </div>
+      <div class="al-testi-author">
+        <div class="al-testi-avatar" id="al-testi-avatar" style="background:linear-gradient(135deg,#059669,#34D399)">K</div>
+        <div><p class="al-testi-name" id="al-testi-name">Kingsley Eze</p><p class="al-testi-loc" id="al-testi-loc">Electrician · Surulere</p></div>
+        <div class="al-testi-dots" id="al-testi-dots"></div>
+      </div>
+    </div>
+    <div class="al-trust-row">
+      <div class="al-trust-item"><i class="fa fa-naira-sign"></i><span>Secure payments</span></div>
+      <div class="al-trust-item"><i class="fa fa-bell"></i><span>SMS alerts</span></div>
+      <div class="al-trust-item"><i class="fa fa-star"></i><span>Build reputation</span></div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <a href="index.html" class="ar-mobile-logo"><span class="logo-mark logo-mark-sm" style="background:var(--brand-green)">A</span><span class="logo-text">Artizan</span></a>
+    <div class="ar-form-wrap">
+      <div class="role-switcher">
+        <a href="customer-login.html" class="rs-tab"><i class="fa fa-user"></i> Customer</a>
+        <a href="artisan-login.html" class="rs-tab rs-active"><i class="fa fa-hammer"></i> Artisan</a>
+      </div>
+      <div class="ar-form-header">
+        <h2 class="ar-form-title">Sign in to your artisan account</h2>
+        <p class="ar-form-sub">New to Artizan? <a href="artisan-signup.html" class="ar-link">Join as an artisan</a></p>
+      </div>
+
+      <div class="kyc-banner">
+        <i class="fa fa-shield-halved"></i>
+        <span>After logging in, complete your KYC verification to start accepting bookings. It takes less than 5 minutes.</span>
+      </div>
+
+      <form class="ar-form" id="artisan-login-form" novalidate>
+        <div class="ar-field" id="field-email">
+          <label class="ar-label">Email address</label>
+          <div class="ar-input-wrap">
+            <i class="fa fa-envelope ar-input-icon"></i>
+            <input type="email" id="email" class="ar-input" placeholder="you@example.com" autocomplete="email" required/>
+            <span class="ar-field-check" id="check-email"></span>
+          </div>
+          <p class="ar-field-error" id="error-email"></p>
+        </div>
+        <div class="ar-field" id="field-password">
+          <div class="ar-label-row">
+            <label class="ar-label">Password</label>
+            <a href="forgot-password.html" class="ar-forgot">Forgot password?</a>
+          </div>
+          <div class="ar-input-wrap">
+            <i class="fa fa-lock ar-input-icon"></i>
+            <input type="password" id="password" class="ar-input ar-input-pw" placeholder="Enter your password" autocomplete="current-password" required/>
+            <button type="button" class="ar-pw-toggle" id="pw-toggle"><i class="fa fa-eye" id="pw-icon"></i></button>
+          </div>
+          <p class="ar-field-error" id="error-password"></p>
+        </div>
+        <div class="ar-remember">
+          <label class="ar-checkbox-label">
+            <input type="checkbox" id="remember-me" class="ar-checkbox"/>
+            <span class="ar-checkbox-custom"></span>
+            <span>Remember me for 30 days</span>
+          </label>
+        </div>
+        <div class="ar-global-error" id="global-error" style="display:none">
+          <i class="fa fa-circle-exclamation"></i>
+          <span id="global-error-text">Incorrect email or password.</span>
+        </div>
+        <div class="ar-rate-limit" id="rate-limit" style="display:none">
+          <i class="fa fa-clock"></i>
+          <span>Too many attempts. Wait <strong id="countdown">60</strong>s.</span>
+        </div>
+        <button type="submit" class="ar-submit-btn" id="submit-btn">
+          <span id="submit-text">Sign In as Artisan</span>
+          <span id="submit-spinner" style="display:none"><i class="fa fa-spinner fa-spin"></i></span>
+        </button>
+      </form>
+      <div class="ar-bottom-links">
+        <a href="customer-login.html" class="ar-switch-role"><i class="fa fa-user"></i> Are you a customer? Sign in here</a>
+      </div>
+    </div>
+    <div class="ar-footer"><a href="#">Privacy</a><span>·</span><a href="#">Terms</a><span>·</span><a href="#">Help</a></div>
+  </div>
+</div>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/artisan-login.js"></script>
+</body>
+</html>

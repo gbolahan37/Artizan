@@ -10,7 +10,7 @@
 // ── CONSTANTS
 const LAGOS_CENTER   = { lat: 6.5244, lng: 3.3792 };
 const DEFAULT_RADIUS = 10; // km
-const API_BASE       = '/api'; // Change to full URL when backend is live
+// const API_BASE       = '/api'; // Change to full URL when backend is live
 
 // Avatar gradient palettes
 const AVATAR_GRADIENTS = [

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Customer Account — Artizan Lagos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/auth.css"/>
+</head>
+<body class="auth-body">
+<div class="auth-shell">
+  <div class="auth-left">
+    <div class="al-bg"><div class="al-blob b1"></div><div class="al-blob b2"></div><div class="al-grid"></div></div>
+    <a href="index.html" class="al-logo"><span class="logo-mark">A</span><span class="logo-text">Artizan</span></a>
+    <div class="al-headline">
+      <p class="al-eyebrow">Join free today</p>
+      <h1 clac:\Users\HomePC\Downloads\Artizan_Customer_Signup\artizan\assets\js\customer-signup.jsss="al-title">Book with<br/><em>confidence.</em></h1>
+      <p class="al-sub">Create your account in under 2 minutes and start booking verified artisans near you.</p>
+    </div>
+    <div class="al-stats">
+      <div class="al-stat"><span class="al-stat-num" data-target="500">0</span><span>+</span><p>Verified artisans</p></div>
+      <div class="al-stat-sep"></div>
+      <div class="al-stat"><span class="al-stat-num" data-target="12000">0</span><span>+</span><p>Bookings done</p></div>
+      <div class="al-stat-sep"></div>
+      <div class="al-stat"><span class="al-stat-num" data-target="98">0</span><span>%</span><p>Satisfaction</p></div>
+    </div>
+    <div class="al-testimonial" id="al-testimonial">
+      <div class="al-testi-quote">
+        <i class="fa fa-quote-left al-quote-icon"></i>
+        <p class="al-testi-text" id="al-testi-text">"Signing up took 2 minutes. Found and booked a cleaner the same day."</p>
+      </div>
+      <div class="al-testi-author">
+        <div class="al-testi-avatar" id="al-testi-avatar">T</div>
+        <div><p class="al-testi-name" id="al-testi-name">Tunde Williams</p><p class="al-testi-loc" id="al-testi-loc">Ikeja, Lagos</p></div>
+        <div class="al-testi-dots" id="al-testi-dots"></div>
+      </div>
+    </div>
+    <div class="al-trust-row">
+      <div class="al-trust-item"><i class="fa fa-shield-halved"></i><span>KYC Verified</span></div>
+      <div class="al-trust-item"><i class="fa fa-lock"></i><span>Escrow Protected</span></div>
+      <div class="al-trust-item"><i class="fa fa-user-check"></i><span>Free to join</span></div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <a href="index.html" class="ar-mobile-logo"><span class="logo-mark logo-mark-sm">A</span><span class="logo-text">Artizan</span></a>
+    <div class="ar-form-wrap">
+      <div class="role-switcher">
+        <a href="customer-signup.html" class="rs-tab rs-active"><i class="fa fa-user"></i> Customer</a>
+        <a href="artisan-signup.html" class="rs-tab"><i class="fa fa-hammer"></i> Artisan</a>
+      </div>
+
+      <div class="ar-step-indicator">
+        <div class="ar-step"><div class="step-circle active" id="sc-1">1</div><span class="step-label active" id="sl-1">Your details</span></div>
+        <div class="step-connector" id="conn-1"></div>
+        <div class="ar-step"><div class="step-circle" id="sc-2">2</div><span class="step-label" id="sl-2">Location</span></div>
+        <div class="step-connector" id="conn-2"></div>
+        <div class="ar-step"><div class="step-circle" id="sc-3">3</div><span class="step-label" id="sl-3">Done</span></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="ar-step-panel active" id="step-1">
+        <div class="ar-form-header">
+          <h2 class="ar-form-title">Create your account</h2>
+          <p class="ar-form-sub">Already have one? <a href="customer-login.html" class="ar-link">Sign in</a></p>
+        </div>
+        <form id="step1-form" novalidate>
+          <div class="ar-name-row">
+            <div class="ar-field" id="field-first">
+              <label class="ar-label">First name</label>
+              <div class="ar-input-wrap"><i class="fa fa-user ar-input-icon"></i><input type="text" id="first-name" class="ar-input" placeholder="First name" autocomplete="given-name"/><span class="ar-field-check" id="check-first"></span></div>
+              <p class="ar-field-error" id="error-first"></p>
+            </div>
+            <div class="ar-field" id="field-last">
+              <label class="ar-label">Last name</label>
+              <div class="ar-input-wrap"><i class="fa fa-user ar-input-icon"></i><input type="text" id="last-name" class="ar-input" placeholder="Last name" autocomplete="family-name"/><span class="ar-field-check" id="check-last"></span></div>
+              <p class="ar-field-error" id="error-last"></p>
+            </div>
+          </div>
+          <div class="ar-field" id="field-email">
+            <label class="ar-label">Email address</label>
+            <div class="ar-input-wrap"><i class="fa fa-envelope ar-input-icon"></i><input type="email" id="email" class="ar-input" placeholder="you@example.com" autocomplete="email"/><span class="ar-field-check" id="check-email"></span></div>
+            <p class="ar-field-error" id="error-email"></p>
+          </div>
+          <div class="ar-field" id="field-phone">
+            <label class="ar-label">Phone number</label>
+            <div class="ar-phone-wrap">
+              <div class="ar-phone-prefix"><span>🇳🇬</span> +234</div>
+              <div class="ar-input-wrap" style="flex:1"><input type="tel" id="phone" class="ar-input ar-phone-input" placeholder="0812 345 6789" autocomplete="tel"/><span class="ar-field-check" id="check-phone"></span></div>
+            </div>
+            <p class="ar-field-error" id="error-phone"></p>
+          </div>
+          <div class="ar-field" id="field-password">
+            <label class="ar-label">Password</label>
+            <div class="ar-input-wrap"><i class="fa fa-lock ar-input-icon"></i><input type="password" id="password" class="ar-input ar-input-pw" placeholder="Create a strong password" autocomplete="new-password"/><button type="button" class="ar-pw-toggle" id="pw-toggle-1"><i class="fa fa-eye" id="pw-icon-1"></i></button></div>
+            <div class="pw-strength-wrap"><div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-fill"></div></div><span class="pw-strength-label" id="pw-label"></span></div>
+            <p class="ar-field-error" id="error-password"></p>
+          </div>
+          <div class="ar-field" id="field-confirm">
+            <label class="ar-label">Confirm password</label>
+            <div class="ar-input-wrap"><i class="fa fa-lock ar-input-icon"></i><input type="password" id="confirm-password" class="ar-input ar-input-pw" placeholder="Repeat your password" autocomplete="new-password"/><button type="button" class="ar-pw-toggle" id="pw-toggle-2"><i class="fa fa-eye" id="pw-icon-2"></i></button></div>
+            <p class="ar-field-error" id="error-confirm"></p>
+          </div>
+          <div class="ar-remember" style="margin-bottom:24px">
+            <label class="ar-checkbox-label"><input type="checkbox" id="terms" class="ar-checkbox"/><span class="ar-checkbox-custom"></span><span>I agree to <a href="#" class="ar-link">Terms of Service</a> and <a href="#" class="ar-link">Privacy Policy</a></span></label>
+            <p class="ar-field-error" id="error-terms"></p>
+          </div>
+          <div class="ar-global-error" id="global-error-1" style="display:none"><i class="fa fa-circle-exclamation"></i><span id="global-error-text-1">Something went wrong.</span></div>
+          <div class="ar-form-nav"><button type="submit" class="ar-btn-next">Continue <i class="fa fa-arrow-right"></i></button></div>
+        </form>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="ar-step-panel" id="step-2">
+        <div class="ar-form-header">
+          <h2 class="ar-form-title">Where are you based?</h2>
+          <p class="ar-form-sub">Helps us show artisans near you.</p>
+        </div>
+        <form id="step2-form" novalidate>
+          <div class="ar-field" id="field-address">
+            <label class="ar-label">Your default address</label>
+            <div class="ar-input-wrap"><i class="fa fa-location-dot ar-input-icon"></i><input type="text" id="address" class="ar-input" placeholder="e.g. 14 Admiralty Way, Lekki Phase 1"/><span class="ar-field-check" id="check-address"></span></div>
+            <p class="ar-field-error" id="error-address"></p>
+          </div>
+          <div class="ar-field" id="field-area">
+            <label class="ar-label">Area / LGA</label>
+            <div class="ar-input-wrap"><i class="fa fa-map ar-input-icon"></i>
+              <select id="area" class="ar-input" style="padding-left:40px">
+                <option value="" disabled selected>Select your area</option>
+                <option>Lekki</option><option>Victoria Island</option><option>Lagos Island</option>
+                <option>Ikoyi</option><option>Ikeja</option><option>Surulere</option>
+                <option>Yaba</option><option>Mushin</option><option>Agege</option>
+                <option>Alimosho</option><option>Ojo</option><option>Badagry</option><option>Other</option>
+              </select>
+            </div>
+            <p class="ar-field-error" id="error-area"></p>
+          </div>
+          <div class="ar-field">
+            <label class="ar-label">Or detect automatically</label>
+            <button type="button" class="ar-social-btn" id="locate-btn"><i class="fa fa-crosshairs" style="color:var(--brand-purple)"></i> Use my current location</button>
+          </div>
+          <div class="ar-global-error" id="global-error-2" style="display:none"><i class="fa fa-circle-exclamation"></i><span id="global-error-text-2">Something went wrong.</span></div>
+          <div class="ar-form-nav">
+            <button type="button" class="ar-btn-back" id="btn-back-2"><i class="fa fa-arrow-left"></i> Back</button>
+            <button type="submit" class="ar-btn-next"><span id="btn-next-2-text">Create Account</span><span id="btn-next-2-spinner" style="display:none"><i class="fa fa-spinner fa-spin"></i></span></button>
+          </div>
+        </form>
+      </div>
+
+      <!-- STEP 3: Success -->
+      <div class="ar-step-panel" id="step-3">
+        <div class="ar-success">
+          <div class="ar-success-icon"><i class="fa fa-circle-check"></i></div>
+          <h3>Welcome to Artizan!</h3>
+          <p>Your account is ready. Start browsing verified artisans near you across Lagos right now.</p>
+          <a href="discover.html" class="ar-success-btn"><i class="fa fa-map"></i> Find Artisans Near Me</a>
+          <p style="margin-top:14px;font-size:0.8rem;color:var(--text-muted)">Or go to your <a href="customer-dashboard.html" class="ar-link">dashboard</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ar-footer"><a href="#">Privacy Policy</a><span>·</span><a href="#">Terms</a><span>·</span><a href="#">Help</a></div>
+  </div>
+</div>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/customer-signup.js"></script>
+</body>
+</html>
