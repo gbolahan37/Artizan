@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join as Artisan — Artizan Lagos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/auth.css"/>
+  <style>
+    .auth-left{background:linear-gradient(160deg,#052E16 0%,#065F46 45%,#047857 100%);}
+    .al-title em{color:#6EE7B7;}
+    .rs-tab.rs-active,.ar-link{color:var(--brand-green);}
+    .ar-submit-btn,.ar-btn-next{background:var(--brand-green);}
+    .ar-submit-btn:hover,.ar-btn-next:hover{background:var(--brand-green-dark);}
+    .step-circle.active{border-color:var(--brand-green);color:var(--brand-green);}
+    .step-circle.done{border-color:var(--brand-green);background:var(--brand-green);}
+    .step-connector.done{background:var(--brand-green);}
+    .ar-success-btn{background:var(--brand-green);}
+    .ar-success-btn:hover{background:var(--brand-green-dark);}
+  </style>
+</head>
+<body class="auth-body">
+<div class="auth-shell">
+  <div class="auth-left">
+    <div class="al-bg"><div class="al-blob b1" style="background:radial-gradient(circle,#059669,transparent 70%)"></div><div class="al-blob b2" style="background:radial-gradient(circle,#34D399,transparent 70%)"></div><div class="al-grid"></div></div>
+    <a href="index.html" class="al-logo"><span class="logo-mark" style="background:var(--brand-green)">A</span><span class="logo-text">Artizan</span></a>
+    <div class="al-headline">
+      <p class="al-eyebrow">Turn your skills into income</p>
+      <h1 class="al-title">Earn more,<br/><em>stress less.</em></h1>
+      <p class="al-sub">Join 500+ verified artisans already earning steady income on Artizan. Set your own rates, own your schedule.</p>
+    </div>
+    <div class="al-stats">
+      <div class="al-stat"><span class="al-stat-num" data-target="187500">0</span><span style="font-size:0.9rem">₦</span><p>Top earner/month</p></div>
+      <div class="al-stat-sep"></div>
+      <div class="al-stat"><span class="al-stat-num" data-target="500">0</span><span>+</span><p>Active artisans</p></div>
+      <div class="al-stat-sep"></div>
+      <div class="al-stat"><span class="al-stat-num" data-target="0">0</span><span style="font-size:0.85rem"> fees</span><p>Free to join</p></div>
+    </div>
+    <div class="al-testimonial" id="al-testimonial">
+      <div class="al-testi-quote">
+        <i class="fa fa-quote-left al-quote-icon"></i>
+        <p class="al-testi-text" id="al-testi-text">"My earnings doubled in my first month. Customers pay through escrow so I always get paid on time."</p>
+      </div>
+      <div class="al-testi-author">
+        <div class="al-testi-avatar" id="al-testi-avatar" style="background:linear-gradient(135deg,#059669,#34D399)">C</div>
+        <div><p class="al-testi-name" id="al-testi-name">Chukwudi Nwosu</p><p class="al-testi-loc" id="al-testi-loc">Plumber · Victoria Island</p></div>
+        <div class="al-testi-dots" id="al-testi-dots"></div>
+      </div>
+    </div>
+    <div class="al-trust-row">
+      <div class="al-trust-item"><i class="fa fa-naira-sign" style="color:#6EE7B7"></i><span>Guaranteed payments</span></div>
+      <div class="al-trust-item"><i class="fa fa-bell" style="color:#6EE7B7"></i><span>SMS job alerts</span></div>
+      <div class="al-trust-item"><i class="fa fa-calendar" style="color:#6EE7B7"></i><span>Your schedule</span></div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <a href="index.html" class="ar-mobile-logo"><span class="logo-mark logo-mark-sm" style="background:var(--brand-green)">A</span><span class="logo-text">Artizan</span></a>
+    <div class="ar-form-wrap">
+      <div class="role-switcher">
+        <a href="customer-signup.html" class="rs-tab"><i class="fa fa-user"></i> Customer</a>
+        <a href="artisan-signup.html" class="rs-tab rs-active"><i class="fa fa-hammer"></i> Artisan</a>
+      </div>
+
+      <!-- 5-step indicator -->
+      <div class="ar-step-indicator" style="flex-wrap:wrap;gap:4px">
+        <div class="ar-step"><div class="step-circle active" id="sc-1">1</div><span class="step-label active" id="sl-1">You</span></div>
+        <div class="step-connector" id="conn-1"></div>
+        <div class="ar-step"><div class="step-circle" id="sc-2">2</div><span class="step-label" id="sl-2">Skill</span></div>
+        <div class="step-connector" id="conn-2"></div>
+        <div class="ar-step"><div class="step-circle" id="sc-3">3</div><span class="step-label" id="sl-3">Location</span></div>
+        <div class="step-connector" id="conn-3"></div>
+        <div class="ar-step"><div class="step-circle" id="sc-4">4</div><span class="step-label" id="sl-4">KYC</span></div>
+        <div class="step-connector" id="conn-4"></div>
+        <div class="ar-step"><div class="step-circle" id="sc-5">5</div><span class="step-label" id="sl-5">Done</span></div>
+      </div>
+
+      <!-- STEP 1: Personal -->
+      <div class="ar-step-panel active" id="step-1">
+        <div class="ar-form-header">
+          <h2 class="ar-form-title">Personal details</h2>
+          <p class="ar-form-sub">Already an artisan? <a href="artisan-login.html" class="ar-link">Sign in</a></p>
+        </div>
+        <form id="step1-form" novalidate>
+          <div class="ar-name-row">
+            <div class="ar-field" id="field-first"><label class="ar-label">First name</label><div class="ar-input-wrap"><i class="fa fa-user ar-input-icon"></i><input type="text" id="first-name" class="ar-input" placeholder="First name"/><span class="ar-field-check" id="check-first"></span></div><p class="ar-field-error" id="error-first"></p></div>
+            <div class="ar-field" id="field-last"><label class="ar-label">Last name</label><div class="ar-input-wrap"><i class="fa fa-user ar-input-icon"></i><input type="text" id="last-name" class="ar-input" placeholder="Last name"/><span class="ar-field-check" id="check-last"></span></div><p class="ar-field-error" id="error-last"></p></div>
+          </div>
+          <div class="ar-field" id="field-email"><label class="ar-label">Email address</label><div class="ar-input-wrap"><i class="fa fa-envelope ar-input-icon"></i><input type="email" id="email" class="ar-input" placeholder="you@example.com" autocomplete="email"/><span class="ar-field-check" id="check-email"></span></div><p class="ar-field-error" id="error-email"></p></div>
+          <div class="ar-field" id="field-phone"><label class="ar-label">Phone number</label><div class="ar-phone-wrap"><div class="ar-phone-prefix"><span>🇳🇬</span> +234</div><div class="ar-input-wrap" style="flex:1"><input type="tel" id="phone" class="ar-input ar-phone-input" placeholder="0812 345 6789"/><span class="ar-field-check" id="check-phone"></span></div></div><p class="ar-field-error" id="error-phone"></p></div>
+          <div class="ar-field" id="field-password"><label class="ar-label">Password</label><div class="ar-input-wrap"><i class="fa fa-lock ar-input-icon"></i><input type="password" id="password" class="ar-input ar-input-pw" placeholder="Create a strong password" autocomplete="new-password"/><button type="button" class="ar-pw-toggle" id="pw-toggle-1"><i class="fa fa-eye" id="pw-icon-1"></i></button></div><div class="pw-strength-wrap"><div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-fill"></div></div><span class="pw-strength-label" id="pw-label"></span></div><p class="ar-field-error" id="error-password"></p></div>
+          <div class="ar-field" id="field-confirm"><label class="ar-label">Confirm password</label><div class="ar-input-wrap"><i class="fa fa-lock ar-input-icon"></i><input type="password" id="confirm-password" class="ar-input ar-input-pw" placeholder="Repeat your password" autocomplete="new-password"/><button type="button" class="ar-pw-toggle" id="pw-toggle-2"><i class="fa fa-eye" id="pw-icon-2"></i></button></div><p class="ar-field-error" id="error-confirm"></p></div>
+          <div class="ar-form-nav"><button type="submit" class="ar-btn-next">Continue <i class="fa fa-arrow-right"></i></button></div>
+        </form>
+      </div>
+
+      <!-- STEP 2: Skill -->
+      <div class="ar-step-panel" id="step-2">
+        <div class="ar-form-header"><h2 class="ar-form-title">Your skill</h2><p class="ar-form-sub">Tell us what you do best.</p></div>
+        <form id="step2-form" novalidate>
+          <div class="ar-field" id="field-category"><label class="ar-label">Skill category</label><div class="ar-input-wrap"><i class="fa fa-screwdriver-wrench ar-input-icon"></i><select id="category" class="ar-input" style="padding-left:40px"><option value="" disabled selected>Select your skill</option><option value="home-repair">Home Repair</option><option value="plumbing">Plumbing</option><option value="electrical">Electrical</option><option value="tailoring">Tailoring</option><option value="carpentry">Carpentry</option><option value="painting">Painting</option><option value="cleaning">Home Cleaning</option><option value="laundry">Laundry</option><option value="babysitting">Babysitting</option><option value="elder-care">Elder Care</option><option value="security">Security</option><option value="tutoring">Private Tutoring</option></select></div><p class="ar-field-error" id="error-category"></p></div>
+          <div class="ar-field" id="field-experience"><label class="ar-label">Years of experience</label><div class="ar-input-wrap"><i class="fa fa-briefcase ar-input-icon"></i><select id="experience" class="ar-input" style="padding-left:40px"><option value="" disabled selected>Select years</option><option value="1">Less than 1 year</option><option value="2">1–2 years</option><option value="5">3–5 years</option><option value="8">6–9 years</option><option value="10">10+ years</option></select></div><p class="ar-field-error" id="error-experience"></p></div>
+          <div class="ar-field" id="field-bio"><label class="ar-label">Bio <span style="color:var(--text-muted);font-weight:400">(min 50 characters)</span></label><div class="ar-input-wrap"><textarea id="bio" class="ar-input" style="padding:12px 14px;min-height:90px;resize:vertical" placeholder="Describe your skills, experience, and what makes you the best choice for customers..."></textarea></div><p class="ar-field-error" id="error-bio"></p></div>
+          <div class="ar-field" id="field-rate"><label class="ar-label">Base rate per job (₦)</label><div class="ar-input-wrap"><i class="fa fa-naira-sign ar-input-icon"></i><input type="number" id="rate" class="ar-input" placeholder="e.g. 8000" min="500"/></div><p class="ar-field-error" id="error-rate"></p></div>
+          <div class="ar-form-nav"><button type="button" class="ar-btn-back" id="btn-back-2"><i class="fa fa-arrow-left"></i> Back</button><button type="submit" class="ar-btn-next">Continue <i class="fa fa-arrow-right"></i></button></div>
+        </form>
+      </div>
+
+      <!-- STEP 3: Location -->
+      <div class="ar-step-panel" id="step-3">
+        <div class="ar-form-header"><h2 class="ar-form-title">Your location</h2><p class="ar-form-sub">Customers nearby will find you on the map.</p></div>
+        <form id="step3-form" novalidate>
+          <div class="ar-field" id="field-address"><label class="ar-label">Base address (where you operate from)</label><div class="ar-input-wrap"><i class="fa fa-location-dot ar-input-icon"></i><input type="text" id="address" class="ar-input" placeholder="e.g. 5 Bode Thomas St, Surulere"/></div><p class="ar-field-error" id="error-address"></p></div>
+          <div class="ar-field">
+            <label class="ar-label">Service zones <span style="color:var(--text-muted);font-weight:400">(select all you cover)</span></label>
+            <div class="ar-zones-grid" id="zones-grid">
+              <div class="ar-zone-chip" data-zone="lekki">Lekki</div>
+              <div class="ar-zone-chip" data-zone="victoria-island">Victoria Island</div>
+              <div class="ar-zone-chip" data-zone="lagos-island">Lagos Island</div>
+              <div class="ar-zone-chip" data-zone="ikoyi">Ikoyi</div>
+              <div class="ar-zone-chip" data-zone="ikeja">Ikeja</div>
+              <div class="ar-zone-chip" data-zone="surulere">Surulere</div>
+              <div class="ar-zone-chip" data-zone="yaba">Yaba</div>
+              <div class="ar-zone-chip" data-zone="mushin">Mushin</div>
+              <div class="ar-zone-chip" data-zone="agege">Agege</div>
+              <div class="ar-zone-chip" data-zone="alimosho">Alimosho</div>
+            </div>
+            <p class="ar-field-error" id="error-zones"></p>
+          </div>
+          <div class="ar-field">
+            <label class="ar-label">Service radius</label>
+            <div class="ar-radius-wrap">
+              <input type="range" id="radius" class="ar-radius-slider" min="2" max="20" value="10" step="1"/>
+              <span class="ar-radius-val" id="radius-val">10 km</span>
+            </div>
+          </div>
+          <div class="ar-form-nav"><button type="button" class="ar-btn-back" id="btn-back-3"><i class="fa fa-arrow-left"></i> Back</button><button type="submit" class="ar-btn-next">Continue <i class="fa fa-arrow-right"></i></button></div>
+        </form>
+      </div>
+
+      <!-- STEP 4: KYC -->
+      <div class="ar-step-panel" id="step-4">
+        <div class="ar-form-header"><h2 class="ar-form-title">Identity verification</h2><p class="ar-form-sub">Required to go live. Takes less than 2 minutes.</p></div>
+        <form id="step4-form" novalidate>
+          <div class="ar-field" id="field-id-type"><label class="ar-label">ID document type</label><div class="ar-input-wrap"><i class="fa fa-id-card ar-input-icon"></i><select id="id-type" class="ar-input" style="padding-left:40px"><option value="" disabled selected>Select ID type</option><option value="nin">NIN Slip</option><option value="voters">Voter's Card</option><option value="drivers">Driver's Licence</option><option value="passport">International Passport</option></select></div><p class="ar-field-error" id="error-id-type"></p></div>
+          <div class="ar-field" id="field-id-doc">
+            <label class="ar-label">Upload ID document</label>
+            <div class="ar-file-field" id="id-drop-zone">
+              <div class="ar-file-icon"><i class="fa fa-cloud-arrow-up"></i></div>
+              <p class="ar-file-text"><strong>Click to upload</strong> or drag and drop</p>
+              <p class="ar-file-hint">JPG, PNG or PDF · Max 5MB</p>
+              <input type="file" id="id-doc" accept="image/*,.pdf" style="display:none"/>
+            </div>
+            <div class="ar-file-preview" id="id-preview" style="display:none">
+              <i class="fa fa-file-circle-check"></i>
+              <span id="id-filename">document.jpg</span>
+              <button type="button" id="id-remove"><i class="fa fa-xmark"></i></button>
+            </div>
+            <p class="ar-field-error" id="error-id-doc"></p>
+          </div>
+          <div class="ar-field" id="field-cert">
+            <label class="ar-label">Professional certificate <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
+            <div class="ar-file-field" id="cert-drop-zone">
+              <div class="ar-file-icon" style="font-size:1.3rem"><i class="fa fa-certificate"></i></div>
+              <p class="ar-file-text"><strong>Click to upload</strong> certificate (optional)</p>
+              <p class="ar-file-hint">JPG, PNG or PDF · Max 5MB</p>
+              <input type="file" id="cert-doc" accept="image/*,.pdf" style="display:none"/>
+            </div>
+            <div class="ar-file-preview" id="cert-preview" style="display:none">
+              <i class="fa fa-file-circle-check"></i>
+              <span id="cert-filename">certificate.pdf</span>
+              <button type="button" id="cert-remove"><i class="fa fa-xmark"></i></button>
+            </div>
+          </div>
+          <div class="ar-remember" style="margin-bottom:24px">
+            <label class="ar-checkbox-label"><input type="checkbox" id="terms" class="ar-checkbox"/><span class="ar-checkbox-custom"></span><span>I agree to <a href="#" class="ar-link">Terms of Service</a> and <a href="#" class="ar-link">Privacy Policy</a></span></label>
+            <p class="ar-field-error" id="error-terms"></p>
+          </div>
+          <div class="ar-global-error" id="global-error" style="display:none"><i class="fa fa-circle-exclamation"></i><span id="global-error-text">Something went wrong.</span></div>
+          <div class="ar-form-nav">
+            <button type="button" class="ar-btn-back" id="btn-back-4"><i class="fa fa-arrow-left"></i> Back</button>
+            <button type="submit" class="ar-btn-next" id="final-submit"><span id="final-submit-text">Create Artisan Account</span><span id="final-submit-spinner" style="display:none"><i class="fa fa-spinner fa-spin"></i></span></button>
+          </div>
+        </form>
+      </div>
+
+      <!-- STEP 5: Success -->
+      <div class="ar-step-panel" id="step-5">
+        <div class="ar-success">
+          <div class="ar-success-icon" style="background:#ECFDF5;color:#059669"><i class="fa fa-circle-check"></i></div>
+          <h3>You're on Artizan!</h3>
+          <p>Your account is created. Our team will review your KYC documents within 24–48 hours. You'll receive an SMS and email when you're approved.</p>
+          <a href="artisan-dashboard.html" class="ar-success-btn" style="background:var(--brand-green)"><i class="fa fa-gauge"></i> Go to My Dashboard</a>
+          <div style="margin-top:20px;background:var(--ink-50);border-radius:10px;padding:14px 16px;font-size:0.82rem;color:var(--text-secondary);text-align:left">
+            <p style="font-weight:600;margin-bottom:6px;color:var(--text-primary)">While you wait for KYC approval:</p>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+              <li><i class="fa fa-check" style="color:var(--brand-green);margin-right:6px"></i> Complete your profile bio</li>
+              <li><i class="fa fa-check" style="color:var(--brand-green);margin-right:6px"></i> Upload portfolio photos</li>
+              <li><i class="fa fa-check" style="color:var(--brand-green);margin-right:6px"></i> Set your availability hours</li>
+              <li><i class="fa fa-check" style="color:var(--brand-green);margin-right:6px"></i> Add your bank account for payments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ar-footer"><a href="#">Privacy</a><span>·</span><a href="#">Terms</a><span>·</span><a href="#">Help</a></div>
+  </div>
+</div>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/artisan-signup.js"></script>
+</body>
+</html>
