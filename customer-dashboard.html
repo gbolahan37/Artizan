@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Dashboard — Artizan Lagos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/dashboard.css"/>
+</head>
+<body class="dash-body">
+
+<!-- ══════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <a href="index.html" class="sb-logo">
+      <span class="logo-mark">A</span>
+      <span class="logo-text">Artizan</span>
+    </a>
+    <button class="sb-close" id="sb-close"><i class="fa fa-xmark"></i></button>
+  </div>
+
+  <div class="sb-user">
+    <div class="sb-avatar" id="sb-avatar">F</div>
+    <div class="sb-user-info">
+      <p class="sb-user-name" id="sb-user-name">Folake Adeyemi</p>
+      <p class="sb-user-email" id="sb-user-email">folake@gmail.com</p>
+    </div>
+  </div>
+
+  <nav class="sb-nav">
+    <a href="#" class="sb-link active" data-section="overview">
+      <i class="fa fa-house"></i><span>Overview</span>
+    </a>
+    <a href="#" class="sb-link" data-section="bookings">
+      <i class="fa fa-calendar-check"></i><span>My Bookings</span>
+      <span class="sb-badge" id="badge-bookings">2</span>
+    </a>
+    <a href="#" class="sb-link" data-section="messages">
+      <i class="fa fa-comment-dots"></i><span>Messages</span>
+      <span class="sb-badge" id="badge-messages">3</span>
+    </a>
+    <a href="#" class="sb-link" data-section="saved">
+      <i class="fa fa-bookmark"></i><span>Saved Artisans</span>
+    </a>
+    <a href="#" class="sb-link" data-section="profile">
+      <i class="fa fa-user-circle"></i><span>Profile</span>
+    </a>
+  </nav>
+
+  <div class="sb-bottom">
+    <a href="discover.html" class="sb-find-btn">
+      <i class="fa fa-magnifying-glass"></i> Find an Artisan
+    </a>
+    <button class="sb-logout" id="logout-btn">
+      <i class="fa fa-right-from-bracket"></i> Log Out
+    </button>
+  </div>
+</aside>
+
+<!-- Overlay for mobile sidebar -->
+<div class="sb-overlay" id="sb-overlay"></div>
+
+<!-- ══════════════════════════════════════════
+     MAIN WRAPPER
+══════════════════════════════════════════ -->
+<div class="dash-main">
+
+  <!-- TOPBAR -->
+  <header class="dash-topbar">
+    <button class="topbar-menu" id="topbar-menu">
+      <i class="fa fa-bars"></i>
+    </button>
+    <h1 class="topbar-title" id="topbar-title">Overview</h1>
+    <div class="topbar-right">
+      <!-- Notification bell -->
+      <div class="notif-wrap" id="notif-wrap">
+        <button class="topbar-icon-btn" id="notif-btn">
+          <i class="fa fa-bell"></i>
+          <span class="topbar-badge" id="notif-count">3</span>
+        </button>
+        <div class="notif-dropdown" id="notif-dropdown" style="display:none">
+          <div class="notif-header">
+            <span>Notifications</span>
+            <button class="notif-clear" id="notif-clear">Mark all read</button>
+          </div>
+          <div class="notif-list" id="notif-list"></div>
+        </div>
+      </div>
+      <!-- Search -->
+      <a href="discover.html" class="topbar-icon-btn" title="Find artisan">
+        <i class="fa fa-magnifying-glass"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTENT PANELS -->
+  <div class="dash-content">
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <section class="dash-panel active" id="panel-overview">
+      <div class="panel-hero">
+        <div>
+          <p class="panel-eyebrow">Good morning 👋</p>
+          <h2 class="panel-heading" id="greeting-name">Folake</h2>
+          <p class="panel-sub">Here's a summary of your activity on Artizan.</p>
+        </div>
+        <a href="discover.html" class="panel-cta-btn">
+          <i class="fa fa-plus"></i> Book an Artisan
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrap purple"><i class="fa fa-calendar-check"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-total">7</p>
+            <p class="stat-lbl">Total bookings</p>
+          </div>
+          <div class="stat-trend up"><i class="fa fa-arrow-trend-up"></i> 2 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap green"><i class="fa fa-circle-check"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-completed">5</p>
+            <p class="stat-lbl">Completed</p>
+          </div>
+          <div class="stat-trend up"><i class="fa fa-arrow-trend-up"></i> 71% rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap amber"><i class="fa fa-spinner"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-active">2</p>
+            <p class="stat-lbl">Active</p>
+          </div>
+          <div class="stat-trend neutral">In progress</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap blue"><i class="fa fa-naira-sign"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-spent">₦54K</p>
+            <p class="stat-lbl">Total spent</p>
+          </div>
+          <div class="stat-trend neutral">7 jobs</div>
+        </div>
+      </div>
+
+      <!-- Active bookings quick view -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">Active Bookings</h3>
+          <button class="section-block-link" data-section="bookings">View all</button>
+        </div>
+        <div class="booking-list" id="overview-bookings"></div>
+      </div>
+
+      <!-- Recommended artisans -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">Recommended for you</h3>
+          <a href="discover.html" class="section-block-link">See all</a>
+        </div>
+        <div class="rec-artisan-row" id="overview-rec"></div>
+      </div>
+    </section>
+
+    <!-- ═══ MY BOOKINGS ═══ -->
+    <section class="dash-panel" id="panel-bookings">
+      <div class="panel-toprow">
+        <div>
+          <h2 class="panel-heading">My Bookings</h2>
+          <p class="panel-sub">Track and manage all your service bookings.</p>
+        </div>
+        <a href="discover.html" class="panel-cta-btn"><i class="fa fa-plus"></i> New Booking</a>
+      </div>
+
+      <!-- Filters -->
+      <div class="booking-filters">
+        <button class="bf-chip active" data-filter="all">All</button>
+        <button class="bf-chip" data-filter="pending">Pending</button>
+        <button class="bf-chip" data-filter="confirmed">Confirmed</button>
+        <button class="bf-chip" data-filter="in_progress">In Progress</button>
+        <button class="bf-chip" data-filter="completed">Completed</button>
+        <button class="bf-chip" data-filter="cancelled">Cancelled</button>
+      </div>
+
+      <div class="booking-list-full" id="bookings-list"></div>
+    </section>
+
+    <!-- ═══ MESSAGES ═══ -->
+    <section class="dash-panel" id="panel-messages">
+      <h2 class="panel-heading">Messages</h2>
+      <p class="panel-sub">Chat with your artisans. Messaging unlocks after a booking is confirmed.</p>
+
+      <div class="chat-shell">
+        <!-- Conversation list -->
+        <div class="chat-list" id="chat-list"></div>
+
+        <!-- Chat window -->
+        <div class="chat-window" id="chat-window">
+          <div class="chat-empty" id="chat-empty">
+            <i class="fa fa-comment-dots"></i>
+            <p>Select a conversation to start chatting</p>
+          </div>
+          <div class="chat-active" id="chat-active" style="display:none">
+            <div class="chat-header" id="chat-header"></div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-wrap">
+              <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..."/>
+              <button class="chat-send" id="chat-send"><i class="fa fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SAVED ARTISANS ═══ -->
+    <section class="dash-panel" id="panel-saved">
+      <div class="panel-toprow">
+        <div>
+          <h2 class="panel-heading">Saved Artisans</h2>
+          <p class="panel-sub">Artisans you've bookmarked for quick access.</p>
+        </div>
+        <a href="discover.html" class="panel-cta-btn"><i class="fa fa-magnifying-glass"></i> Find More</a>
+      </div>
+      <div class="saved-grid" id="saved-grid"></div>
+    </section>
+
+    <!-- ═══ PROFILE ═══ -->
+    <section class="dash-panel" id="panel-profile">
+      <h2 class="panel-heading">My Profile</h2>
+      <p class="panel-sub">Keep your details up to date.</p>
+
+      <div class="profile-card">
+        <div class="profile-avatar-row">
+          <div class="profile-dash-avatar" id="profile-dash-avatar">F</div>
+          <div>
+            <h3 class="profile-dash-name" id="profile-dash-name">Folake Adeyemi</h3>
+            <p class="profile-dash-email" id="profile-dash-email">folake@gmail.com</p>
+            <span class="profile-badge">Customer</span>
+          </div>
+        </div>
+
+        <form id="profile-form" novalidate>
+          <div class="pf-row">
+            <div class="pf-field">
+              <label class="pf-label">First name</label>
+              <input type="text" id="pf-first" class="pf-input" placeholder="First name"/>
+            </div>
+            <div class="pf-field">
+              <label class="pf-label">Last name</label>
+              <input type="text" id="pf-last" class="pf-input" placeholder="Last name"/>
+            </div>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Email address</label>
+            <input type="email" id="pf-email" class="pf-input" placeholder="Email address"/>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Phone number</label>
+            <input type="tel" id="pf-phone" class="pf-input" placeholder="+234 xxx xxx xxxx"/>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Default address</label>
+            <input type="text" id="pf-address" class="pf-input" placeholder="Your address in Lagos"/>
+          </div>
+
+          <div class="pf-divider">Change password</div>
+          <div class="pf-row">
+            <div class="pf-field">
+              <label class="pf-label">New password</label>
+              <input type="password" id="pf-pw" class="pf-input" placeholder="Leave blank to keep current"/>
+            </div>
+            <div class="pf-field">
+              <label class="pf-label">Confirm new password</label>
+              <input type="password" id="pf-pw-confirm" class="pf-input" placeholder="Repeat new password"/>
+            </div>
+          </div>
+
+          <div class="pf-error" id="pf-error"></div>
+          <div class="pf-success" id="pf-success" style="display:none"><i class="fa fa-circle-check"></i> Profile updated successfully.</div>
+
+          <div class="pf-actions">
+            <button type="submit" class="pf-save-btn">Save Changes</button>
+            <button type="button" class="pf-delete-btn" id="pf-delete-btn">Delete Account</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     REVIEW MODAL
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="review-modal" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close-btn" id="review-modal-close"><i class="fa fa-xmark"></i></button>
+    <div class="modal-icon"><i class="fa fa-star"></i></div>
+    <h3 class="modal-title">Rate your experience</h3>
+    <p class="modal-sub" id="review-artisan-name">How was your job with Chukwudi?</p>
+    <div class="star-selector" id="star-selector">
+      <button class="star-btn" data-val="1"><i class="fa fa-star"></i></button>
+      <button class="star-btn" data-val="2"><i class="fa fa-star"></i></button>
+      <button class="star-btn" data-val="3"><i class="fa fa-star"></i></button>
+      <button class="star-btn" data-val="4"><i class="fa fa-star"></i></button>
+      <button class="star-btn" data-val="5"><i class="fa fa-star"></i></button>
+    </div>
+    <p class="star-label" id="star-label">Tap a star to rate</p>
+    <textarea id="review-comment" class="review-textarea" placeholder="Share your experience (optional)..." rows="3"></textarea>
+    <button class="review-submit-btn" id="review-submit">Submit Review</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONFIRM MODAL (generic)
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="confirm-modal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-icon danger"><i class="fa fa-triangle-exclamation"></i></div>
+    <h3 class="modal-title" id="confirm-title">Are you sure?</h3>
+    <p class="modal-sub" id="confirm-msg">This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="confirm-yes-btn" id="confirm-yes">Yes, continue</button>
+      <button class="confirm-no-btn" id="confirm-no">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="assets/js/customer-dashboard.js"></script>
+</body>
+</html>
