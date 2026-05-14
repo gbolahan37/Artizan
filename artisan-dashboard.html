@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artisan Dashboard — Artizan Lagos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/dashboard.css"/>
+  <link rel="stylesheet" href="assets/css/artisan-dashboard.css"/>
+</head>
+<body class="dash-body">
+
+<!-- ══════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <a href="index.html" class="sb-logo">
+      <span class="logo-mark">A</span>
+      <span class="logo-text">Artizan</span>
+    </a>
+    <button class="sb-close" id="sb-close"><i class="fa fa-xmark"></i></button>
+  </div>
+
+  <div class="sb-user">
+    <div class="sb-avatar artisan-av" id="sb-avatar">C</div>
+    <div class="sb-user-info">
+      <p class="sb-user-name" id="sb-user-name">Chukwudi Nwosu</p>
+      <p class="sb-user-email" id="sb-user-email">chukwudi@gmail.com</p>
+    </div>
+  </div>
+
+  <nav class="sb-nav">
+    <p class="sb-section-label">Main</p>
+    <a href="#" class="sb-link active" data-section="overview">
+      <i class="fa fa-house"></i><span>Overview</span>
+    </a>
+    <a href="#" class="sb-link" data-section="bookings">
+      <i class="fa fa-calendar-check"></i><span>Job Requests</span>
+      <span class="sb-badge" id="badge-bookings">3</span>
+    </a>
+    <a href="#" class="sb-link" data-section="schedule">
+      <i class="fa fa-calendar-days"></i><span>Schedule</span>
+    </a>
+    <a href="#" class="sb-link" data-section="messages">
+      <i class="fa fa-comment-dots"></i><span>Messages</span>
+      <span class="sb-badge" id="badge-messages">2</span>
+    </a>
+
+    <p class="sb-section-label">Business</p>
+    <a href="#" class="sb-link" data-section="earnings">
+      <i class="fa fa-naira-sign"></i><span>Earnings</span>
+    </a>
+    <a href="#" class="sb-link" data-section="portfolio">
+      <i class="fa fa-images"></i><span>Portfolio</span>
+    </a>
+
+    <p class="sb-section-label">Account</p>
+    <a href="#" class="sb-link" data-section="profile">
+      <i class="fa fa-user-circle"></i><span>Profile & KYC</span>
+    </a>
+  </nav>
+
+  <div class="sb-bottom">
+    <a href="artisan-profile.html" class="sb-find-btn artisan-btn">
+      <i class="fa fa-eye"></i> View My Profile
+    </a>
+    <button class="sb-logout" id="logout-btn">
+      <i class="fa fa-right-from-bracket"></i> Log Out
+    </button>
+  </div>
+</aside>
+
+<!-- Overlay for mobile sidebar -->
+<div class="sb-overlay" id="sb-overlay"></div>
+
+<!-- ══════════════════════════════════════════
+     MAIN WRAPPER
+══════════════════════════════════════════ -->
+<div class="dash-main">
+
+  <!-- TOPBAR -->
+  <header class="dash-topbar">
+    <button class="topbar-menu" id="topbar-menu">
+      <i class="fa fa-bars"></i>
+    </button>
+    <h1 class="topbar-title" id="topbar-title">Overview</h1>
+    <div class="topbar-right">
+      <!-- Availability quick toggle -->
+      <div class="topbar-avail-wrap" id="topbar-avail-wrap" title="Toggle availability">
+        <label class="avail-toggle" style="margin:0">
+          <input type="checkbox" id="avail-topbar-toggle" checked/>
+          <div class="avail-track"><div class="avail-thumb"></div></div>
+        </label>
+        <span class="topbar-avail-label" id="topbar-avail-label">Available</span>
+      </div>
+      <!-- Notification bell -->
+      <div class="notif-wrap" id="notif-wrap">
+        <button class="topbar-icon-btn" id="notif-btn">
+          <i class="fa fa-bell"></i>
+          <span class="topbar-badge" id="notif-count">4</span>
+        </button>
+        <div class="notif-dropdown" id="notif-dropdown" style="display:none">
+          <div class="notif-header">
+            <span>Notifications</span>
+            <button class="notif-clear" id="notif-clear">Mark all read</button>
+          </div>
+          <div class="notif-list" id="notif-list"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT PANELS -->
+  <div class="dash-content">
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <section class="dash-panel active" id="panel-overview">
+      <div class="panel-hero">
+        <div>
+          <p class="panel-eyebrow">Good morning 👋</p>
+          <h2 class="panel-heading" id="greeting-name">Chukwudi</h2>
+          <p class="panel-sub">Here's your business snapshot on Artizan.</p>
+        </div>
+        <button class="panel-cta-btn green-btn" data-section="bookings">
+          <i class="fa fa-inbox"></i> View Job Requests
+        </button>
+      </div>
+
+      <!-- Availability toggle card -->
+      <div class="avail-toggle-card">
+        <div class="atc-left">
+          <h4>Availability Status</h4>
+          <p id="avail-status-text">You are currently <strong style="color:var(--brand-green)">available</strong> — customers can book you.</p>
+        </div>
+        <label class="avail-toggle">
+          <input type="checkbox" id="avail-main-toggle" checked/>
+          <div class="avail-track"><div class="avail-thumb"></div></div>
+        </label>
+      </div>
+
+      <!-- TrustScore widget -->
+      <div class="trust-score-widget" id="trust-score-widget">
+        <div>
+          <div class="ts-num" id="ts-num">87</div>
+          <div class="ts-label">TrustScore</div>
+          <span class="ts-band" id="ts-band">Highly Trusted</span>
+        </div>
+        <div class="ts-bars" id="ts-bars">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrap green"><i class="fa fa-naira-sign"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-earned">₦182K</p>
+            <p class="stat-lbl">Total earned</p>
+          </div>
+          <div class="stat-trend up"><i class="fa fa-arrow-trend-up"></i> ₦38K this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap purple"><i class="fa fa-briefcase"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-jobs">31</p>
+            <p class="stat-lbl">Jobs completed</p>
+          </div>
+          <div class="stat-trend up"><i class="fa fa-arrow-trend-up"></i> 97% completion</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap amber"><i class="fa fa-star"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-rating">4.9</p>
+            <p class="stat-lbl">Average rating</p>
+          </div>
+          <div class="stat-trend up"><i class="fa fa-arrow-trend-up"></i> 28 reviews</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap orange"><i class="fa fa-inbox"></i></div>
+          <div class="stat-body">
+            <p class="stat-val" id="stat-pending">3</p>
+            <p class="stat-lbl">Pending requests</p>
+          </div>
+          <div class="stat-trend neutral">Awaiting response</div>
+        </div>
+      </div>
+
+      <!-- Upcoming jobs quick view -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">Upcoming Jobs</h3>
+          <button class="section-block-link" data-section="schedule">View schedule</button>
+        </div>
+        <div class="booking-list" id="overview-upcoming"></div>
+      </div>
+
+      <!-- Pending requests quick view -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">New Job Requests</h3>
+          <button class="section-block-link" data-section="bookings">View all</button>
+        </div>
+        <div class="booking-list" id="overview-pending"></div>
+      </div>
+    </section>
+
+    <!-- ═══ JOB REQUESTS ═══ -->
+    <section class="dash-panel" id="panel-bookings">
+      <div class="panel-toprow">
+        <div>
+          <h2 class="panel-heading">Job Requests</h2>
+          <p class="panel-sub">Accept or decline incoming booking requests from customers.</p>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="booking-filters">
+        <button class="bf-chip active green-active" data-filter="all">All</button>
+        <button class="bf-chip" data-filter="pending">Pending</button>
+        <button class="bf-chip" data-filter="confirmed">Confirmed</button>
+        <button class="bf-chip" data-filter="in_progress">In Progress</button>
+        <button class="bf-chip" data-filter="completed">Completed</button>
+        <button class="bf-chip" data-filter="cancelled">Cancelled</button>
+      </div>
+
+      <div class="booking-list-full" id="jobs-list"></div>
+    </section>
+
+    <!-- ═══ SCHEDULE ═══ -->
+    <section class="dash-panel" id="panel-schedule">
+      <div class="panel-toprow">
+        <div>
+          <h2 class="panel-heading">My Schedule</h2>
+          <p class="panel-sub">Manage your working hours and confirmed job slots.</p>
+        </div>
+      </div>
+
+      <!-- Week view -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">This Week</h3>
+          <span class="section-block-link" id="week-range-label" style="cursor:default;color:var(--text-muted)"></span>
+        </div>
+        <div class="schedule-week" id="schedule-week"></div>
+      </div>
+
+      <!-- Availability Hours -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">Working Hours</h3>
+          <button class="section-block-link" id="save-hours-btn">Save changes</button>
+        </div>
+        <div class="avail-hours-grid" id="avail-hours-grid"></div>
+      </div>
+
+      <!-- Confirmed bookings on schedule -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">Confirmed Jobs</h3>
+        </div>
+        <div class="booking-list-full" id="schedule-jobs-list"></div>
+      </div>
+    </section>
+
+    <!-- ═══ MESSAGES ═══ -->
+    <section class="dash-panel" id="panel-messages">
+      <h2 class="panel-heading">Messages</h2>
+      <p class="panel-sub">Chat with customers. Messaging unlocks after you confirm a booking.</p>
+
+      <div class="chat-shell">
+        <div class="chat-list" id="chat-list"></div>
+        <div class="chat-window" id="chat-window">
+          <div class="chat-empty" id="chat-empty">
+            <i class="fa fa-comment-dots"></i>
+            <p>Select a conversation to start chatting</p>
+          </div>
+          <div class="chat-active" id="chat-active" style="display:none">
+            <div class="chat-header" id="chat-header"></div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-wrap">
+              <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..."/>
+              <button class="chat-send" id="chat-send"><i class="fa fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ EARNINGS ═══ -->
+    <section class="dash-panel" id="panel-earnings">
+      <div class="panel-toprow">
+        <div>
+          <h2 class="panel-heading">Earnings</h2>
+          <p class="panel-sub">Track your income and request withdrawals.</p>
+        </div>
+      </div>
+
+      <div class="earnings-summary">
+        <div class="earnings-card">
+          <p class="ec-period">This week</p>
+          <p class="ec-amount" id="earn-week">₦18,500</p>
+          <p class="ec-jobs" id="earn-week-jobs">3 jobs</p>
+        </div>
+        <div class="earnings-card">
+          <p class="ec-period">This month</p>
+          <p class="ec-amount" id="earn-month">₦38,000</p>
+          <p class="ec-jobs" id="earn-month-jobs">6 jobs</p>
+        </div>
+        <div class="earnings-card">
+          <p class="ec-period">All time</p>
+          <p class="ec-amount" id="earn-total">₦182,500</p>
+          <p class="ec-jobs" id="earn-total-jobs">31 jobs</p>
+        </div>
+      </div>
+
+      <!-- Withdraw form -->
+      <div class="withdraw-form">
+        <h4><i class="fa fa-building-columns" style="margin-right:8px;color:var(--brand-green)"></i>Available balance: <span id="avail-balance">₦12,500</span></h4>
+        <input type="number" id="withdraw-input" class="withdraw-input" placeholder="Enter amount (₦)"/>
+        <button class="withdraw-btn" id="withdraw-btn">Withdraw to Bank</button>
+      </div>
+
+      <!-- Transaction history -->
+      <div class="section-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">Transaction History</h3>
+        </div>
+        <div class="booking-list-full" id="earnings-history"></div>
+      </div>
+    </section>
+
+    <!-- ═══ PORTFOLIO ═══ -->
+    <section class="dash-panel" id="panel-portfolio">
+      <div class="panel-toprow">
+        <div>
+          <h2 class="panel-heading">My Portfolio</h2>
+          <p class="panel-sub">Showcase your best work. Upload up to 10 photos to attract more customers.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-count-bar">
+        <span id="portfolio-count-text">5 / 10 photos uploaded</span>
+        <div class="portfolio-count-track">
+          <div class="portfolio-count-fill" id="portfolio-count-fill" style="width:50%"></div>
+        </div>
+      </div>
+
+      <div class="portfolio-manager-grid" id="portfolio-grid"></div>
+
+      <!-- Hidden file input -->
+      <input type="file" id="portfolio-file-input" accept="image/*" style="display:none"/>
+
+      <!-- Caption modal -->
+      <div class="modal-backdrop" id="caption-modal" style="display:none">
+        <div class="modal-box">
+          <button class="modal-close-btn" id="caption-modal-close"><i class="fa fa-xmark"></i></button>
+          <div class="modal-icon" style="background:#ECFDF5;color:#059669"><i class="fa fa-image"></i></div>
+          <h3 class="modal-title">Add a caption</h3>
+          <p class="modal-sub">Describe the work shown in this photo.</p>
+          <input type="text" id="caption-input" class="pf-input" placeholder="e.g. Fixed burst kitchen pipe, Lekki" style="margin-bottom:16px"/>
+          <button class="review-submit-btn" id="caption-submit" style="background:var(--brand-green)">Upload Photo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROFILE & KYC ═══ -->
+    <section class="dash-panel" id="panel-profile">
+      <h2 class="panel-heading">Profile & KYC</h2>
+      <p class="panel-sub">Keep your details accurate and complete your identity verification.</p>
+
+      <!-- KYC status banner -->
+      <div class="kyc-banner" id="kyc-banner">
+        <div class="kyc-banner-icon"><i class="fa fa-shield-halved"></i></div>
+        <div class="kyc-banner-body">
+          <h4 id="kyc-banner-title">Identity Verified</h4>
+          <p id="kyc-banner-sub">Your government ID has been verified. Your TrustScore has been boosted.</p>
+        </div>
+        <span class="kyc-status-badge" id="kyc-status-badge">Verified</span>
+      </div>
+
+      <div class="profile-card" style="max-width:720px">
+        <div class="profile-avatar-row">
+          <div class="profile-dash-avatar artisan-av" id="profile-dash-avatar">C</div>
+          <div>
+            <h3 class="profile-dash-name" id="profile-dash-name">Chukwudi Nwosu</h3>
+            <p class="profile-dash-email" id="profile-dash-email">chukwudi@gmail.com</p>
+            <span class="profile-badge artisan-badge">Artisan · Plumber</span>
+          </div>
+        </div>
+
+        <form id="profile-form" novalidate>
+          <div class="pf-row">
+            <div class="pf-field">
+              <label class="pf-label">First name</label>
+              <input type="text" id="pf-first" class="pf-input" placeholder="First name"/>
+            </div>
+            <div class="pf-field">
+              <label class="pf-label">Last name</label>
+              <input type="text" id="pf-last" class="pf-input" placeholder="Last name"/>
+            </div>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Email address</label>
+            <input type="email" id="pf-email" class="pf-input" placeholder="Email address"/>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Phone number</label>
+            <input type="tel" id="pf-phone" class="pf-input" placeholder="+234 xxx xxx xxxx"/>
+          </div>
+          <div class="pf-row">
+            <div class="pf-field">
+              <label class="pf-label">Skill category</label>
+              <select id="pf-skill" class="pf-input">
+                <option>Plumbing</option><option>Electrical</option><option>Home Repair</option>
+                <option>Tailoring</option><option>Carpentry</option><option>Painting</option>
+                <option>Home Cleaning</option><option>Laundry</option><option>Babysitting</option>
+                <option>Elder Care</option><option>Security</option><option>Private Tutoring</option>
+              </select>
+            </div>
+            <div class="pf-field">
+              <label class="pf-label">Years of experience</label>
+              <input type="number" id="pf-exp" class="pf-input" placeholder="e.g. 5" min="0" max="50"/>
+            </div>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Hourly rate (₦)</label>
+            <input type="number" id="pf-rate" class="pf-input" placeholder="e.g. 3500"/>
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Bio</label>
+            <textarea id="pf-bio" class="pf-input" rows="3" placeholder="Briefly describe your skills and experience..." style="resize:vertical;padding-top:10px"></textarea>
+          </div>
+
+          <div class="pf-divider">KYC Document</div>
+          <div class="kyc-upload-row">
+            <div class="kyc-doc-preview" id="kyc-doc-preview">
+              <i class="fa fa-id-card"></i>
+              <span id="kyc-doc-name">NIN Slip uploaded</span>
+            </div>
+            <label class="kyc-upload-btn" for="kyc-file-input">
+              <i class="fa fa-arrow-up-from-bracket"></i> Replace Document
+            </label>
+            <input type="file" id="kyc-file-input" accept="image/*,.pdf" style="display:none"/>
+          </div>
+
+          <div class="pf-divider">Change password</div>
+          <div class="pf-row">
+            <div class="pf-field">
+              <label class="pf-label">New password</label>
+              <input type="password" id="pf-pw" class="pf-input" placeholder="Leave blank to keep current"/>
+            </div>
+            <div class="pf-field">
+              <label class="pf-label">Confirm new password</label>
+              <input type="password" id="pf-pw-confirm" class="pf-input" placeholder="Repeat new password"/>
+            </div>
+          </div>
+
+          <div class="pf-error" id="pf-error"></div>
+          <div class="pf-success" id="pf-success" style="display:none"><i class="fa fa-circle-check"></i> Profile updated successfully.</div>
+
+          <div class="pf-actions">
+            <button type="submit" class="pf-save-btn" style="background:var(--brand-green)">Save Changes</button>
+            <button type="button" class="pf-delete-btn" id="pf-delete-btn">Delete Account</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONFIRM MODAL (generic)
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="confirm-modal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-icon danger"><i class="fa fa-triangle-exclamation"></i></div>
+    <h3 class="modal-title" id="confirm-title">Are you sure?</h3>
+    <p class="modal-sub" id="confirm-msg">This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="confirm-yes-btn" id="confirm-yes">Yes, continue</button>
+      <button class="confirm-no-btn" id="confirm-no">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="assets/js/artisan-dashboard.js"></script>
+</body>
+</html>
