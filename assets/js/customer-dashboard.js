@@ -19,13 +19,15 @@ const DEMO_USER = {
 };
 
 const DEMO_BOOKINGS = [
-  { id: 'b1', artisan: 'Chukwudi Nwosu',  skill: 'Plumbing',      date: 'Today, 2:00 PM',      amount: 6500,  status: 'in_progress', gradient: ['#059669','#34D399'], initial: 'C', job: 'Burst pipe repair in kitchen' },
-  { id: 'b2', artisan: 'Aisha Bello',     skill: 'Tailoring',     date: 'Tomorrow, 10:00 AM',  amount: 4000,  status: 'confirmed',   gradient: ['#7B2D8B','#C084FC'], initial: 'A', job: 'Wedding ankara dress — 2 outfits' },
-  { id: 'b3', artisan: 'Tayo Adeyemi',    skill: 'Home Cleaning', date: 'Sat, 9:00 AM',        amount: 7000,  status: 'pending',     gradient: ['#1447E6','#60A5FA'], initial: 'T', job: 'Full apartment deep clean' },
-  { id: 'b4', artisan: 'Emeka Okafor',    skill: 'Electrical',    date: 'Jun 5, 3:00 PM',      amount: 8000,  status: 'completed',   gradient: ['#0077B6','#48CAE4'], initial: 'E', job: 'Inverter installation and wiring' },
-  { id: 'b5', artisan: 'Ngozi Ogundimu',  skill: 'Elder Care',    date: 'May 28, 8:00 AM',     amount: 6000,  status: 'completed',   gradient: ['#4F46E5','#818CF8'], initial: 'N', job: 'Weekly elder care — 3 days' },
-  { id: 'b6', artisan: 'Biodun Lawal',    skill: 'Carpentry',     date: 'May 20, 11:00 AM',    amount: 15000, status: 'completed',   gradient: ['#E85D04','#F4A261'], initial: 'B', job: 'Custom wardrobe installation' },
-  { id: 'b7', artisan: 'Rotimi Fasanya',  skill: 'Security',      date: 'May 10, 6:00 AM',     amount: 8000,  status: 'cancelled',   gradient: ['#2B2D42','#8D99AE'], initial: 'R', job: 'Event security — birthday party' },
+  { id: 'b1', artisan: 'Chukwudi Nwosu',  skill: 'Plumbing',      date: 'Today, 2:00 PM',      amount: 6500,  status: 'in_progress', gradient: ['#059669','#34D399'], initial: 'C', job: 'Burst pipe repair in kitchen', negotiationHistory: [] },
+  { id: 'b2', artisan: 'Aisha Bello',     skill: 'Tailoring',     date: 'Tomorrow, 10:00 AM',  amount: 4000,  status: 'confirmed',   gradient: ['#7B2D8B','#C084FC'], initial: 'A', job: 'Wedding ankara dress — 2 outfits', negotiationHistory: [] },
+  { id: 'b3', artisan: 'Tayo Adeyemi',    skill: 'Home Cleaning', date: 'Sat, 9:00 AM',        amount: 7000,  status: 'pending',     gradient: ['#1447E6','#60A5FA'], initial: 'T', job: 'Full apartment deep clean', negotiationHistory: [] },
+  { id: 'b8', artisan: 'Chukwudi Nwosu',  skill: 'Plumbing',      date: 'Mon, 11:00 AM',       amount: 8000,  status: 'negotiating', gradient: ['#059669','#34D399'], initial: 'C', job: 'Kitchen sink and dishwasher plumbing', counterAmount: 11500, lastOfferFrom: 'artisan', negotiationHistory: [{ from: 'artisan', amount: 11500, note: 'The dishwasher rerouting adds more work than expected. ₦11,500 covers materials and 3–4 hrs labour.', time: '2 hrs ago' }] },
+  { id: 'b9', artisan: 'Emeka Okafor',    skill: 'Electrical',    date: 'Wed, 2:00 PM',        amount: 5000,  status: 'negotiating', gradient: ['#0077B6','#48CAE4'], initial: 'E', job: 'Inverter battery replacement', counterAmount: 6200, lastOfferFrom: 'artisan', negotiationHistory: [{ from: 'artisan', amount: 6200, note: 'The 200AH battery costs ₦5,200. Plus ₦1,000 for my labour.', time: '1 hr ago' }] },
+  { id: 'b4', artisan: 'Emeka Okafor',    skill: 'Electrical',    date: 'Jun 5, 3:00 PM',      amount: 8000,  status: 'completed',   gradient: ['#0077B6','#48CAE4'], initial: 'E', job: 'Inverter installation and wiring', negotiationHistory: [] },
+  { id: 'b5', artisan: 'Ngozi Ogundimu',  skill: 'Elder Care',    date: 'May 28, 8:00 AM',     amount: 6000,  status: 'completed',   gradient: ['#4F46E5','#818CF8'], initial: 'N', job: 'Weekly elder care — 3 days', negotiationHistory: [] },
+  { id: 'b6', artisan: 'Biodun Lawal',    skill: 'Carpentry',     date: 'May 20, 11:00 AM',    amount: 15000, status: 'completed',   gradient: ['#E85D04','#F4A261'], initial: 'B', job: 'Custom wardrobe installation', negotiationHistory: [] },
+  { id: 'b7', artisan: 'Rotimi Fasanya',  skill: 'Security',      date: 'May 10, 6:00 AM',     amount: 8000,  status: 'cancelled',   gradient: ['#2B2D42','#8D99AE'], initial: 'R', job: 'Event security — birthday party', negotiationHistory: [] },
 ];
 
 const DEMO_SAVED = [
@@ -104,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initProfileForm();
   initChat();
   handleURLHash();
+  // Expose bookings so negotiate.js can mutate statuses in real-time
+  window._customerBookings = state.bookings;
 });
 
 // ══════════════════════════════════════════
@@ -302,6 +306,21 @@ function renderBookings() {
 }
 
 function bookingCardHTML(b, showFullActions) {
+  const NM = window.NegotiationModule;
+  const label = NM ? NM.statusLabel(b.status) : statusLabel(b.status);
+  const statusCls = NM ? NM.statusClass(b.status) : 'status-' + b.status;
+  const displayAmount = b.agreedAmount || b.counterAmount || b.amount;
+
+  // Negotiation status pill shown inside the card body
+  let negPill = '';
+  if (b.status === 'negotiating' && b.lastOfferFrom === 'artisan') {
+    negPill = `<span class="neg-pill"><i class="fa fa-comment-dollar"></i> Artisan sent an offer — tap to view</span>`;
+  } else if (b.status === 'negotiating' && b.lastOfferFrom === 'customer') {
+    negPill = `<span class="neg-pill" style="background:#EEF2FF;color:#4338CA"><i class="fa fa-hourglass-half"></i> Counter-offer sent — awaiting artisan</span>`;
+  } else if (b.status === 'offer_accepted') {
+    negPill = `<span class="offer-pill"><i class="fa fa-circle-check"></i> Price agreed — ready to pay</span>`;
+  }
+
   const actions = buildActions(b, showFullActions);
   return `
     <div class="booking-card" data-booking-id="${b.id}">
@@ -313,11 +332,12 @@ function bookingCardHTML(b, showFullActions) {
           <span><i class="fa fa-screwdriver-wrench"></i>${b.skill}</span>
           <span><i class="fa fa-clock"></i>${b.date}</span>
         </div>
+        ${negPill}
         ${showFullActions ? `<div class="bc-actions">${actions}</div>` : ''}
       </div>
       <div class="bc-right">
-        <span class="bc-status status-${b.status}">${statusLabel(b.status)}</span>
-        <span class="bc-amount">₦${b.amount.toLocaleString()}</span>
+        <span class="bc-status ${statusCls}">${label}</span>
+        <span class="bc-amount">₦${displayAmount.toLocaleString()}</span>
         ${!showFullActions ? `<div class="bc-actions">${actions}</div>` : ''}
       </div>
     </div>
@@ -326,6 +346,38 @@ function bookingCardHTML(b, showFullActions) {
 
 function buildActions(b, full) {
   let btns = '';
+
+  // ── NEGOTIATING: artisan sent offer, customer must respond ──
+  if (b.status === 'negotiating' && b.lastOfferFrom === 'artisan') {
+    btns += `
+      <button class="bc-btn" data-action="respond-offer" data-id="${b.id}"
+        style="background:#059669;color:#fff;font-weight:600;border:none;">
+        <i class="fa fa-comment-dollar"></i> View Offer — ₦${(b.counterAmount || b.amount).toLocaleString()}
+      </button>
+    `;
+    btns += `<button class="bc-btn bc-btn-danger" data-action="cancel" data-id="${b.id}">Cancel</button>`;
+    return btns;
+  }
+
+  // ── NEGOTIATING: customer countered, waiting for artisan ──
+  if (b.status === 'negotiating' && b.lastOfferFrom === 'customer') {
+    btns += `<span style="font-size:0.78rem;color:var(--text-muted);display:flex;align-items:center;gap:5px"><i class="fa fa-hourglass-half"></i> Waiting for artisan…</span>`;
+    btns += `<button class="bc-btn bc-btn-danger" data-action="cancel" data-id="${b.id}">Cancel</button>`;
+    return btns;
+  }
+
+  // ── OFFER ACCEPTED: price agreed, customer must now pay ──
+  if (b.status === 'offer_accepted') {
+    btns += `
+      <button class="bc-btn" data-action="pay-now" data-id="${b.id}"
+        style="background:#059669;color:#fff;font-weight:700;font-size:0.9rem;border:none;padding:10px 16px;">
+        <i class="fa fa-lock"></i> Pay ₦${(b.agreedAmount || b.amount).toLocaleString()} to Confirm
+      </button>
+    `;
+    return btns;
+  }
+
+  // ── EXISTING STATUSES (unchanged) ──
   if (b.status === 'in_progress') {
     btns += `<button class="bc-btn bc-btn-primary" data-action="confirm" data-id="${b.id}">Confirm Complete</button>`;
     btns += `<button class="bc-btn bc-btn-secondary" data-action="message" data-id="${b.id}"><i class="fa fa-comment"></i></button>`;
@@ -353,7 +405,41 @@ function attachBookingActions(container) {
       const booking = state.bookings.find(b => b.id === id);
       if (!booking) return;
 
-      if (action === 'confirm') {
+      if (action === 'respond-offer') {
+        // Customer opens negotiation modal to accept or counter the artisan's offer
+        if (window.NegotiationModule) {
+          NegotiationModule.openCustomerModal(booking, () => {
+            renderOverview();
+            renderBookings();
+          });
+        }
+      } else if (action === 'pay-now') {
+        // Price agreed — trigger Paystack escrow payment
+        const payAmount = booking.agreedAmount || booking.amount;
+        if (window.PaystackHelper) {
+          const user = window.ArtizanAPI?.getStoredUser?.() || { email: 'customer@artizan.ng' };
+          PaystackHelper.payForBooking({
+            booking: { id: booking.id, total_amount_ngn: payAmount },
+            customerEmail: user.email,
+            onComplete: ({ success }) => {
+              if (success) {
+                booking.status = 'confirmed';
+                showToast(`Payment of ₦${payAmount.toLocaleString()} successful! Booking confirmed.`, 'fa-circle-check');
+              } else {
+                showToast('Payment was not completed. Please try again.', 'fa-triangle-exclamation');
+              }
+              renderOverview();
+              renderBookings();
+            },
+          });
+        } else {
+          // Demo mode — no Paystack loaded, simulate payment
+          booking.status = 'confirmed';
+          showToast(`Payment of ₦${payAmount.toLocaleString()} confirmed! (Demo mode)`, 'fa-circle-check');
+          renderOverview();
+          renderBookings();
+        }
+      } else if (action === 'confirm') {
         showConfirm(
           'Confirm job complete?',
           `This will release ₦${booking.amount.toLocaleString()} to ${booking.artisan}. This cannot be undone.`,

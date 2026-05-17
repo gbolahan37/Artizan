@@ -29,15 +29,17 @@ const DEMO_ARTISAN = {
 };
 
 const DEMO_JOBS = [
-  { id: 'j1', customer: 'Folake Adeyemi',   job: 'Burst pipe repair — kitchen sink',   address: '14 Admiralty Way, Lekki',   date: 'Today, 2:00 PM',        amount: 6500,  status: 'in_progress', gradient: ['#4F46E5','#818CF8'], initial: 'F' },
-  { id: 'j2', customer: 'Emeka Eze',         job: 'Bathroom plumbing installation',     address: '5 Adeola Hopewell, VI',     date: 'Tomorrow, 10:00 AM',    amount: 12000, status: 'confirmed',   gradient: ['#1447E6','#60A5FA'], initial: 'E' },
-  { id: 'j3', customer: 'Bisi Okonkwo',      job: 'Water heater fault diagnosis',       address: '8 Gbagada Expressway',      date: 'Fri, 9:00 AM',          amount: 4500,  status: 'pending',     gradient: ['#7B2D8B','#C084FC'], initial: 'B' },
-  { id: 'j4', customer: 'Yemi Adegoke',      job: 'Fix leaking overhead tank valve',    address: '23 Oregun Road, Ikeja',     date: 'Fri, 3:00 PM',          amount: 5000,  status: 'pending',     gradient: ['#E85D04','#F4A261'], initial: 'Y' },
-  { id: 'j5', customer: 'Amaka Obi',         job: 'Full bathroom replumbing',           address: '1 Ozumba Mbadiwe, VI',      date: 'Sat, 8:00 AM',          amount: 35000, status: 'pending',     gradient: ['#059669','#34D399'], initial: 'A' },
-  { id: 'j6', customer: 'Kunle Martins',     job: 'Outdoor borehole pump repair',       address: '17 Ikorodu Road, Ketu',     date: 'Jun 5, 11:00 AM',       amount: 8000,  status: 'completed',   gradient: ['#2B2D42','#8D99AE'], initial: 'K' },
-  { id: 'j7', customer: 'Ngozi Afolabi',     job: 'Blocked drainage clearance',         address: '9 Nnamdi Azikiwe St, CMS',  date: 'May 30, 1:00 PM',       amount: 5500,  status: 'completed',   gradient: ['#0077B6','#48CAE4'], initial: 'N' },
-  { id: 'j8', customer: 'Tunde Fashola',     job: 'Toilet cistern replacement',         address: '4 Oba Elegushi Road, Ikate',date: 'May 22, 4:00 PM',       amount: 7000,  status: 'completed',   gradient: ['#D97706','#FDE68A'], initial: 'T' },
-  { id: 'j9', customer: 'Sola Oduya',        job: 'Gas pipe pressure test',             address: '11 Hughes Ave, Yaba',       date: 'May 10, 10:00 AM',      amount: 4000,  status: 'cancelled',   gradient: ['#DC2626','#FCA5A5'], initial: 'S' },
+  { id: 'j1', customer: 'Folake Adeyemi',  job: 'Burst pipe repair — kitchen sink',   address: '14 Admiralty Way, Lekki',    date: 'Today, 2:00 PM',     amount: 6500,  status: 'in_progress', gradient: ['#4F46E5','#818CF8'], initial: 'F', customerNote: 'The pipe under the kitchen sink has been dripping since last night.', negotiationHistory: [] },
+  { id: 'j2', customer: 'Emeka Eze',       job: 'Bathroom plumbing installation',     address: '5 Adeola Hopewell, VI',      date: 'Tomorrow, 10:00 AM', amount: 12000, status: 'confirmed',   gradient: ['#1447E6','#60A5FA'], initial: 'E', customerNote: '', negotiationHistory: [] },
+  { id: 'j3', customer: 'Bisi Okonkwo',   job: 'Water heater fault diagnosis',       address: '8 Gbagada Expressway',        date: 'Fri, 9:00 AM',       amount: 4500,  status: 'pending',     gradient: ['#7B2D8B','#C084FC'], initial: 'B', customerNote: 'The heater trips the breaker after about 10 minutes. Started last week.', negotiationHistory: [] },
+  { id: 'j4', customer: 'Yemi Adegoke',   job: 'Fix leaking overhead tank valve',    address: '23 Oregun Road, Ikeja',       date: 'Fri, 3:00 PM',       amount: 5000,  status: 'pending',     gradient: ['#E85D04','#F4A261'], initial: 'Y', customerNote: 'Water dripping slowly from the ball valve on the rooftop tank.', negotiationHistory: [] },
+  { id: 'j5', customer: 'Amaka Obi',      job: 'Full bathroom replumbing',           address: '1 Ozumba Mbadiwe, VI',        date: 'Sat, 8:00 AM',       amount: 35000, status: 'pending',     gradient: ['#059669','#34D399'], initial: 'A', customerNote: 'Full replumb of a 3-bedroom flat. Tiles already laid, just need the pipework.', negotiationHistory: [] },
+  { id: 'j10', customer: 'Tunde Bello',   job: 'Kitchen sink and dishwasher plumbing', address: '7 Adetokunbo Ademola, VI',  date: 'Mon, 11:00 AM',      amount: 8000,  status: 'negotiating', gradient: ['#0077B6','#48CAE4'], initial: 'T', customerNote: 'Need pipes rerouted for a new dishwasher and the sink drain is slow.', counterAmount: 11500, lastOfferFrom: 'artisan', negotiationHistory: [{ from: 'artisan', amount: 11500, note: 'The dishwasher rerouting adds more work than expected. ₦11,500 covers materials and 3–4 hrs labour.', time: '2 hrs ago' }] },
+  { id: 'j11', customer: 'Sade Okonkwo',  job: 'Outdoor borehole pressure pump repair', address: '12 Glover Road, Ikoyi',   date: 'Tue, 9:00 AM',       amount: 7000,  status: 'negotiating', gradient: ['#D97706','#FDE68A'], initial: 'S', customerNote: 'Pump pressure has dropped. May need a new pressure switch.', counterAmount: 8500, lastOfferFrom: 'customer', negotiationHistory: [{ from: 'artisan', amount: 9500, note: 'Pressure switch plus call-out fee comes to ₦9,500.', time: '3 hrs ago' }, { from: 'customer', amount: 8500, note: 'Can we do ₦8,500? I have 3 more jobs coming.', time: '1 hr ago' }] },
+  { id: 'j6', customer: 'Kunle Martins',  job: 'Outdoor borehole pump repair',       address: '17 Ikorodu Road, Ketu',       date: 'Jun 5, 11:00 AM',    amount: 8000,  status: 'completed',   gradient: ['#2B2D42','#8D99AE'], initial: 'K', negotiationHistory: [] },
+  { id: 'j7', customer: 'Ngozi Afolabi',  job: 'Blocked drainage clearance',         address: '9 Nnamdi Azikiwe St, CMS',    date: 'May 30, 1:00 PM',    amount: 5500,  status: 'completed',   gradient: ['#0077B6','#48CAE4'], initial: 'N', negotiationHistory: [] },
+  { id: 'j8', customer: 'Tunde Fashola',  job: 'Toilet cistern replacement',         address: '4 Oba Elegushi Road, Ikate',  date: 'May 22, 4:00 PM',    amount: 7000,  status: 'completed',   gradient: ['#D97706','#FDE68A'], initial: 'T', negotiationHistory: [] },
+  { id: 'j9', customer: 'Sola Oduya',    job: 'Gas pipe pressure test',             address: '11 Hughes Ave, Yaba',          date: 'May 10, 10:00 AM',   amount: 4000,  status: 'cancelled',   gradient: ['#DC2626','#FCA5A5'], initial: 'S', negotiationHistory: [] },
 ];
 
 const DEMO_CHATS = [
@@ -125,6 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initProfileForm();
   initWithdraw();
   initSectionLinks();
+  // Expose jobs array so negotiate.js can mutate booking statuses
+  window._artizanJobs = state.jobs;
 });
 
 // ══════════════════════════════════════════
@@ -382,8 +386,23 @@ function renderJobsList() {
 }
 
 function renderJobCard(j, fullActions) {
-  const statusLabel = { pending: 'Pending', confirmed: 'Confirmed', in_progress: 'In Progress', completed: 'Completed', cancelled: 'Cancelled' };
+  const NM = window.NegotiationModule;
+  const label = NM ? NM.statusLabel(j.status)
+    : ({ pending:'Pending', confirmed:'Confirmed', in_progress:'In Progress', completed:'Completed', cancelled:'Cancelled' }[j.status] || j.status);
+  const statusCls = NM ? NM.statusClass(j.status) : 'status-' + j.status;
+
+  // Show contextual negotiation pill on the card
+  let negPill = '';
+  if (j.status === 'negotiating' && j.lastOfferFrom === 'customer') {
+    negPill = `<span class="neg-pill"><i class="fa fa-comment-dollar"></i> Customer countered — awaiting your response</span>`;
+  } else if (j.status === 'negotiating' && j.lastOfferFrom === 'artisan') {
+    negPill = `<span class="neg-pill" style="background:#EEF2FF;color:#4338CA"><i class="fa fa-hourglass-half"></i> Offer sent — awaiting customer</span>`;
+  } else if (j.status === 'offer_accepted') {
+    negPill = `<span class="offer-pill"><i class="fa fa-circle-check"></i> Price agreed — awaiting payment</span>`;
+  }
+
   const actions = fullActions ? getJobActions(j) : getJobActions(j, true);
+  const displayAmount = j.counterAmount || j.amount;
   return `
     <div class="booking-card" data-job-id="${j.id}">
       <div class="bc-avatar" style="background:linear-gradient(135deg,${j.gradient[0]},${j.gradient[1]})">${j.initial}</div>
@@ -394,10 +413,11 @@ function renderJobCard(j, fullActions) {
           <span><i class="fa fa-location-dot"></i>${j.address}</span>
           <span><i class="fa fa-clock"></i>${j.date}</span>
         </div>
+        ${negPill}
       </div>
       <div class="bc-right">
-        <span class="bc-status status-${j.status}">${statusLabel[j.status] || j.status}</span>
-        <span class="bc-amount">₦${j.amount.toLocaleString()}</span>
+        <span class="bc-status ${statusCls}">${label}</span>
+        <span class="bc-amount">₦${displayAmount.toLocaleString()}</span>
         <div class="bc-actions">${actions}</div>
       </div>
     </div>
@@ -405,11 +425,30 @@ function renderJobCard(j, fullActions) {
 }
 
 function getJobActions(j, compact) {
+  // PENDING — artisan reviews and negotiates
   if (j.status === 'pending') {
     return `
-      <button class="bc-btn bc-btn-primary job-accept" data-id="${j.id}"><i class="fa fa-check"></i> Accept</button>
+      <button class="bc-btn job-negotiate" data-id="${j.id}" style="background:#EEF2FF;color:#4338CA;border:1px solid #C7D2FE;">
+        <i class="fa fa-comment-dollar"></i> Review & Negotiate
+      </button>
       <button class="bc-btn bc-btn-danger job-decline" data-id="${j.id}">Decline</button>
     `;
+  }
+  // NEGOTIATING — customer countered, artisan's turn
+  if (j.status === 'negotiating' && j.lastOfferFrom === 'customer') {
+    return `
+      <button class="bc-btn job-negotiate" data-id="${j.id}" style="background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;">
+        <i class="fa fa-arrows-rotate"></i> View Counter-offer
+      </button>
+    `;
+  }
+  // NEGOTIATING — artisan offered, waiting for customer
+  if (j.status === 'negotiating' && j.lastOfferFrom === 'artisan') {
+    return `<span style="font-size:0.78rem;color:var(--text-muted);display:flex;align-items:center;gap:5px"><i class="fa fa-hourglass-half"></i> Waiting for customer…</span>`;
+  }
+  // OFFER ACCEPTED — waiting for Paystack payment
+  if (j.status === 'offer_accepted') {
+    return `<span style="font-size:0.78rem;color:#059669;display:flex;align-items:center;gap:5px"><i class="fa fa-lock"></i> Awaiting payment…</span>`;
   }
   if (j.status === 'confirmed' && !compact) {
     return `<button class="bc-btn bc-btn-primary job-start" data-id="${j.id}"><i class="fa fa-play"></i> Mark Started</button>`;
@@ -421,17 +460,20 @@ function getJobActions(j, compact) {
 }
 
 function attachJobActions() {
-  document.querySelectorAll('.job-accept').forEach(btn => {
+  // NEGOTIATE / REVIEW COUNTER-OFFER button
+  document.querySelectorAll('.job-negotiate').forEach(btn => {
     btn.addEventListener('click', () => {
       const job = state.jobs.find(j => j.id === btn.dataset.id);
       if (!job) return;
-      showConfirm('Accept this job?', `Confirm the booking with ${job.customer}?`, () => {
-        job.status = 'confirmed';
-        refreshAll();
-        showToast(`Booking with ${job.customer} confirmed!`, 'fa-circle-check');
-      });
+      if (window.NegotiationModule) {
+        NegotiationModule.openArtisanModal(job, () => {
+          refreshAll();
+        });
+      }
     });
   });
+
+  // DECLINE
   document.querySelectorAll('.job-decline').forEach(btn => {
     btn.addEventListener('click', () => {
       const job = state.jobs.find(j => j.id === btn.dataset.id);
@@ -443,6 +485,8 @@ function attachJobActions() {
       });
     });
   });
+
+  // MARK STARTED
   document.querySelectorAll('.job-start').forEach(btn => {
     btn.addEventListener('click', () => {
       const job = state.jobs.find(j => j.id === btn.dataset.id);
@@ -452,6 +496,8 @@ function attachJobActions() {
       showToast('Job marked as In Progress.', 'fa-play');
     });
   });
+
+  // MARK DONE
   document.querySelectorAll('.job-done').forEach(btn => {
     btn.addEventListener('click', () => {
       const job = state.jobs.find(j => j.id === btn.dataset.id);
@@ -459,7 +505,7 @@ function attachJobActions() {
       showConfirm('Mark as Complete?', `This will notify ${job.customer} and release payment from escrow.`, () => {
         job.status = 'completed';
         refreshAll();
-        showToast(`Job completed! Payment of ₦${job.amount.toLocaleString()} will be released.`, 'fa-circle-check');
+        showToast(`Job completed! Payment of ₦${(job.agreedAmount || job.amount).toLocaleString()} will be released.`, 'fa-circle-check');
       });
     });
   });
