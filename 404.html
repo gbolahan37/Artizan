@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page not found — Artizan Lagos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/index.css"/>
+  <style>
+    .error-page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 24px; background: var(--ink-50); }
+    .error-code { font-family: var(--font-display); font-size: clamp(80px, 18vw, 160px); font-weight: 900; color: var(--brand-purple); line-height: 1; margin-bottom: 8px; }
+    .error-title { font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 700; color: var(--ink-900); margin-bottom: 12px; }
+    .error-sub { font-size: 1rem; color: var(--text-secondary); max-width: 420px; margin: 0 auto 36px; line-height: 1.6; }
+    .error-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .err-btn-primary { padding: 13px 28px; background: var(--brand-purple); color: #fff; border-radius: var(--radius-full); font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .err-btn-primary:hover { background: var(--brand-purple-dark); transform: translateY(-2px); }
+    .err-btn-ghost { padding: 13px 28px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); border-radius: var(--radius-full); font-size: 0.95rem; font-weight: 500; text-decoration: none; transition: border-color 0.2s; }
+    .err-btn-ghost:hover { border-color: var(--brand-purple); color: var(--brand-purple); }
+    .error-links { margin-top: 48px; }
+    .error-links p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+    .error-links-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .error-links-row a { font-size: 0.85rem; color: var(--brand-purple); text-decoration: none; font-weight: 500; }
+    .error-links-row a:hover { text-decoration: underline; }
+    .err-icon { font-size: 3.5rem; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="logo-mark" src="assets/img/Screenshot_2026-05-09_121250-removebg-preview.png" alt=""/>
+      <span class="logo-text">Artizan</span>
+    </a>
+    <div class="nav-actions">
+      <a href="customer-login.html" class="btn-primary-sm">Sign In</a>
+    </div>
+  </div>
+</nav>
+
+<div class="error-page">
+  <div class="err-icon">🔧</div>
+  <div class="error-code">404</div>
+  <h1 class="error-title">Page not found</h1>
+  <p class="error-sub">The page you are looking for may have been moved, renamed, or does not exist. Let's get you back on track.</p>
+  <div class="error-actions">
+    <a href="index.html" class="err-btn-primary"><i class="fa fa-house"></i> Back to Home</a>
+    <a href="discover.html" class="err-btn-ghost"><i class="fa fa-magnifying-glass"></i> Find an Artisan</a>
+  </div>
+  <div class="error-links">
+    <p>Or visit one of these pages</p>
+    <div class="error-links-row">
+      <a href="customer-login.html">Customer Login</a>
+      <a href="artisan-login.html">Artisan Login</a>
+      <a href="discover.html">Browse Artisans</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </div>
+  </div>
+</div>
+<script src="assets/js/index.js"></script>
+</body>
+</html>
