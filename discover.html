@@ -11,7 +11,30 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="assets/css/style.css"/>
   <link rel="stylesheet" href="assets/css/discover.css"/>
-  <link rel="stylesheet" href="assets/css/index.css"/> 
+  <link rel="stylesheet" href="assets/css/index.css"/>
+  <!--
+    GOOGLE MAPS — ACTION REQUIRED BEFORE GOING LIVE:
+    Replace YOUR_GOOGLE_MAPS_API_KEY below with your real key from:
+    https://console.cloud.google.com  (free tier is enough for demos)
+    Until then, the page shows a static demo map fallback.
+  -->
+  <script>
+    // Graceful fallback — renders a static placeholder map if no API key is set
+    window.MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
+    window.mapsApiReady = false;
+    function initMap() { window.mapsApiReady = true; if (window._onMapsReady) window._onMapsReady(); }
+    function handleMapsError() {
+      const mapEl = document.getElementById('map');
+      if (!mapEl) return;
+      mapEl.innerHTML = `
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f0f4f8;gap:12px;border-radius:inherit">
+          <div style="width:56px;height:56px;border-radius:50%;background:#E0E7FF;display:flex;align-items:center;justify-content:center;font-size:1.5rem">📍</div>
+          <p style="font-size:0.9rem;font-weight:600;color:#374151;margin:0">Map not available in demo mode</p>
+          <p style="font-size:0.8rem;color:#6B7280;margin:0;text-align:center;max-width:220px">Add your Google Maps API key in discover.html to enable the live map</p>
+          <a href="https://console.cloud.google.com" target="_blank" style="font-size:0.8rem;color:#4F46E5;text-decoration:none;font-weight:600">Get a free key →</a>
+        </div>`;
+    }
+  </script>
   <!-- Google Maps — replace YOUR_KEY with actual API key -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places,geometry&callback=initMap" async defer></script>
 </head>

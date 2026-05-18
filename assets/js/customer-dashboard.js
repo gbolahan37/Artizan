@@ -87,10 +87,24 @@ const state = {
   saved: [...DEMO_SAVED],
 };
 
-// ══════════════════════════════════════════
 //   INIT
-// ══════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+
+   //  AUTH GUARD
+  // Runs before anything renders. If no access token exists
+  // the user is not logged in — redirect them to the login page.
+  const token = localStorage.getItem('artizan_access');
+  const role  = localStorage.getItem('artizan_role');
+
+  if (!token || role !== 'customer') {
+    // Save the page they were trying to reach so we can redirect
+    // back after a successful login (handled in customer-login.js)
+    sessionStorage.setItem('artizan_redirect', window.location.href);
+    window.location.replace('customer-login.html');
+    return; // stop all further execution on this page
+  }
+  // ── END AUTH GUARD
+
   loadUser();
   initSidebar();
   initTopbar();
@@ -110,9 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window._customerBookings = state.bookings;
 });
 
-// ══════════════════════════════════════════
 //   USER
-// ══════════════════════════════════════════
 function loadUser() {
   // Try real session, fallback to demo
   const user = AuthStorage?.getUser() || DEMO_USER;
@@ -137,9 +149,7 @@ function loadUser() {
   setVal('pf-address', user.default_address || '');
 }
 
-// ══════════════════════════════════════════
 //   SIDEBAR NAVIGATION
-// ══════════════════════════════════════════
 function initSidebar() {
   // Nav links
   document.querySelectorAll('.sb-link[data-section]').forEach(link => {
@@ -208,9 +218,7 @@ function handleURLHash() {
   if (valid.includes(hash)) navigateTo(hash);
 }
 
-// ══════════════════════════════════════════
 //   TOPBAR — notifications
-// ══════════════════════════════════════════
 function initTopbar() {
   const btn      = document.getElementById('notif-btn');
   const dropdown = document.getElementById('notif-dropdown');
@@ -255,9 +263,7 @@ function renderNotifications() {
   `).join('');
 }
 
-// ══════════════════════════════════════════
 //   OVERVIEW
-// ══════════════════════════════════════════
 function renderOverview() {
   // Active bookings (pending + confirmed + in_progress)
   const active = state.bookings.filter(b => ['pending','confirmed','in_progress'].includes(b.status));
@@ -285,9 +291,7 @@ function renderOverview() {
   }
 }
 
-// ══════════════════════════════════════════
 //   BOOKINGS
-// ══════════════════════════════════════════
 function renderBookings() {
   const listEl = document.getElementById('bookings-list');
   if (!listEl) return;
@@ -486,9 +490,7 @@ function initBookingFilters() {
   });
 }
 
-// ══════════════════════════════════════════
 //   CHAT
-// ══════════════════════════════════════════
 function renderChats() {
   const listEl = document.getElementById('chat-list');
   if (!listEl) return;
@@ -610,9 +612,7 @@ function initChat() {
   input?.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
 }
 
-// ══════════════════════════════════════════
 //   SAVED ARTISANS
-// ══════════════════════════════════════════
 function renderSaved() {
   const grid = document.getElementById('saved-grid');
   if (!grid) return;
@@ -651,9 +651,7 @@ function renderSaved() {
   });
 }
 
-// ══════════════════════════════════════════
 //   PROFILE
-// ══════════════════════════════════════════
 function renderProfile() {
   // Already pre-filled in loadUser()
 }
@@ -696,9 +694,7 @@ function initProfileForm() {
   });
 }
 
-// ══════════════════════════════════════════
 //   REVIEW MODAL
-// ══════════════════════════════════════════
 function initReviewModal() {
   const modal    = document.getElementById('review-modal');
   const closeBtn = document.getElementById('review-modal-close');
@@ -756,9 +752,7 @@ function closeReviewModal() {
   if (modal) modal.style.display = 'none';
 }
 
-// ══════════════════════════════════════════
 //   CONFIRM MODAL
-// ══════════════════════════════════════════
 function initConfirmModal() {
   document.getElementById('confirm-no')?.addEventListener('click', closeConfirm);
   document.getElementById('confirm-modal')?.addEventListener('click', e => {
@@ -784,9 +778,7 @@ function closeConfirm() {
   state.confirmCallback = null;
 }
 
-// ══════════════════════════════════════════
 //   TOAST
-// ══════════════════════════════════════════
 function showToast(message, type = 'info') {
   const wrap = document.getElementById('toast-wrap');
   if (!wrap) return;
@@ -807,9 +799,7 @@ function showToast(message, type = 'info') {
   }, 3500);
 }
 
-// ══════════════════════════════════════════
 //   HELPERS
-// ══════════════════════════════════════════
 function setText(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = val;

@@ -106,10 +106,26 @@ const state = {
   pendingPortfolioFile: null,
 };
 
-// ══════════════════════════════════════════
 //   INIT
-// ══════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+
+  //  AUTH GUARD 
+  // Runs before anything renders. If no access token exists
+  // the user is not logged in — redirect them to the login page.
+  const token = localStorage.getItem('artizan_access');
+  const role  = localStorage.getItem('artizan_role');
+
+  if (!token || role !== 'artisan') {
+    // Save the page they were trying to reach so we can redirect
+    // back after a successful login (handled in artisan-login.js)
+    sessionStorage.setItem('artizan_redirect', window.location.href);
+    window.location.replace('artisan-login.html');
+    return; // stop all further execution on this page
+  }
+  // ── END AUTH GUARD
+
+
+
   loadUser();
   initSidebar();
   initTopbar();
@@ -131,9 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window._artizanJobs = state.jobs;
 });
 
-// ══════════════════════════════════════════
 //   USER
-// ══════════════════════════════════════════
 function loadUser() {
   const u = DEMO_ARTISAN;
   const initial = u.full_name.charAt(0).toUpperCase();
@@ -211,9 +225,7 @@ function renderTrustScore(u) {
   `).join('');
 }
 
-// ══════════════════════════════════════════
 //   SIDEBAR
-// ══════════════════════════════════════════
 function initSidebar() {
   const sidebar  = document.getElementById('sidebar');
   const overlay  = document.getElementById('sb-overlay');
@@ -301,9 +313,7 @@ function navigateTo(section) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ══════════════════════════════════════════
 //   AVAILABILITY TOGGLE
-// ══════════════════════════════════════════
 function initAvailabilityToggle() {
   const mainToggle   = document.getElementById('avail-main-toggle');
   const topbarToggle = document.getElementById('avail-topbar-toggle');
@@ -326,9 +336,7 @@ function initAvailabilityToggle() {
   topbarToggle.addEventListener('change', () => updateUI(topbarToggle.checked));
 }
 
-// ══════════════════════════════════════════
 //   OVERVIEW
-// ══════════════════════════════════════════
 function renderOverview() {
   const u = DEMO_ARTISAN;
   const jobs = state.jobs;
@@ -358,9 +366,7 @@ function renderOverview() {
   attachJobActions();
 }
 
-// ══════════════════════════════════════════
 //   JOB REQUESTS
-// ══════════════════════════════════════════
 function renderJobs() {
   // filter chips
   document.querySelectorAll('#panel-bookings .bf-chip').forEach(chip => {
@@ -519,9 +525,7 @@ function refreshAll() {
   updateBadges();
 }
 
-// ══════════════════════════════════════════
 //   BADGES
-// ══════════════════════════════════════════
 function updateBadges() {
   const pendingCount  = state.jobs.filter(j => j.status === 'pending').length;
   const unreadMsgs    = DEMO_CHATS.reduce((s, c) => s + c.unread, 0);
@@ -533,9 +537,7 @@ function updateBadges() {
   msgBadge.style.display     = unreadMsgs    ? '' : 'none';
 }
 
-// ══════════════════════════════════════════
 //   SCHEDULE
-// ══════════════════════════════════════════
 function renderSchedule() {
   // Week strip
   const weekEl = document.getElementById('schedule-week');
@@ -618,9 +620,7 @@ function renderSchedule() {
   attachJobActions();
 }
 
-// ══════════════════════════════════════════
 //   MESSAGES (CHAT)
-// ══════════════════════════════════════════
 function renderChats() {
   const listEl = document.getElementById('chat-list');
   listEl.innerHTML = DEMO_CHATS.map(c => `
@@ -688,9 +688,7 @@ function openChat(id) {
   input.onkeydown = e => { if (e.key === 'Enter') doSend(); };
 }
 
-// ══════════════════════════════════════════
 //   EARNINGS
-// ══════════════════════════════════════════
 function renderEarnings() {
   const completed = state.jobs.filter(j => j.status === 'completed');
   const total     = completed.reduce((s, j) => s + j.amount, 0);
@@ -729,9 +727,7 @@ function renderEarnings() {
     : emptyState('fa-naira-sign', 'No earnings yet', 'Completed jobs will appear here.');
 }
 
-// ══════════════════════════════════════════
 //   PORTFOLIO
-// ══════════════════════════════════════════
 function renderPortfolio() {
   const max    = 10;
   const count  = state.portfolio.length;
@@ -808,9 +804,7 @@ function initPortfolioUpload() {
   });
 }
 
-// ══════════════════════════════════════════
 //   PROFILE FORM
-// ══════════════════════════════════════════
 function renderProfile() {
   // KYC file input trigger
   document.getElementById('kyc-file-input').addEventListener('change', e => {
@@ -861,9 +855,7 @@ function initProfileForm() {
   });
 }
 
-// ══════════════════════════════════════════
 //   WITHDRAW
-// ══════════════════════════════════════════
 function initWithdraw() {
   document.getElementById('withdraw-btn').addEventListener('click', () => {
     const amt = parseInt(document.getElementById('withdraw-input').value);
@@ -878,9 +870,7 @@ function initWithdraw() {
   });
 }
 
-// ══════════════════════════════════════════
 //   NOTIFICATIONS
-// ══════════════════════════════════════════
 function renderNotifications() {
   const list  = document.getElementById('notif-list');
   const count = document.getElementById('notif-count');
@@ -898,9 +888,7 @@ function renderNotifications() {
   `).join('');
 }
 
-// ══════════════════════════════════════════
 //   CONFIRM MODAL
-// ══════════════════════════════════════════
 function initConfirmModal() {
   document.getElementById('confirm-yes').addEventListener('click', () => {
     document.getElementById('confirm-modal').style.display = 'none';
@@ -920,9 +908,7 @@ function showConfirm(title, msg, cb) {
   document.getElementById('confirm-modal').style.display = 'flex';
 }
 
-// ══════════════════════════════════════════
 //   TOAST
-// ══════════════════════════════════════════
 function showToast(msg, icon = 'fa-circle-check') {
   const wrap = document.getElementById('toast-wrap');
   const item = document.createElement('div');
@@ -932,9 +918,7 @@ function showToast(msg, icon = 'fa-circle-check') {
   setTimeout(() => item.remove(), 4000);
 }
 
-// ══════════════════════════════════════════
 //   HELPERS
-// ══════════════════════════════════════════
 function fmtAmount(n) {
   if (n >= 1000000) return (n/1000000).toFixed(1).replace('.0','') + 'M';
   if (n >= 1000)    return (n/1000).toFixed(0) + 'K';
