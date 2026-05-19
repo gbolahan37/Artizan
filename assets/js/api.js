@@ -340,5 +340,61 @@ const API = {
   },
 };
 
+// ── NETWORK ERROR TOAST
+// Shown on any page when a fetch() call fails completely (no connection / server down)
+// Uses the dashboard toast system if present, otherwise renders its own minimal toast
+let _networkToastDebounce = null;
+function _showNetworkToast() {
+  // Debounce — don't spam if multiple requests fail at once
+  if (_networkToastDebounce) return;
+  _networkToastDebounce = setTimeout(() => { _networkToastDebounce = null; }, 5000);
+
+  // Use dashboard showToast if available
+  if (typeof showToast === 'function') {
+    showToast('No connection — check your network and try again.', 'fa-wifi');
+    return;
+  }
+
+  // Fallback: inject a self-contained toast
+  let wrap = document.getElementById('api-toast-wrap');
+  if (!wrap) {
+    wrap = document.createElement('div');
+    wrap.id = 'api-toast-wrap';
+    wrap.style.cssText = `
+      position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+      z-index:9999;display:flex;flex-direction:column;gap:8px;
+      pointer-events:none;width:max-content;max-width:calc(100vw - 32px)
+    `;
+    document.body.appendChild(wrap);
+  }
+
+  const toast = document.createElement('div');
+  toast.style.cssText = `
+    display:flex;align-items:center;gap:10px;
+    padding:12px 18px;border-radius:12px;
+    background:#1F2937;color:#F9FAFB;
+    font-size:13px;font-weight:500;font-family:inherit;
+    box-shadow:0 4px 20px rgba(0,0,0,0.25);
+    border-left:3px solid #EF9F27;
+    animation:toastIn 0.25s ease;
+    pointer-events:auto;
+  `;
+  toast.innerHTML = `
+    <i class="fa fa-wifi" style="color:#EF9F27;font-size:14px"></i>
+    <span>No connection — check your network and try again.</span>
+  `;
+
+  // Inject minimal keyframe if not already present
+  if (!document.getElementById('api-toast-style')) {
+    const style = document.createElement('style');
+    style.id = 'api-toast-style';
+    style.textContent = `@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`;
+    document.head.appendChild(style);
+  }
+
+  wrap.appendChild(toast);
+  setTimeout(() => toast.remove(), 5000);
+}
+
 // Expose globally
 window.ArtizanAPI = API;

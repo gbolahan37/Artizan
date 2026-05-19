@@ -141,8 +141,27 @@ function attachFormSubmit() {
     // Loading state
     setSubmitLoading(true);
 
+    // Safety wrapper — some environments throw SyntaxError from res.json()
+    // before our catch block sees it. We normalise all such errors here.
+    let loginResult;
     try {
-      const data = await AuthAPI.login(email, password);
+      loginResult = await AuthAPI.login(email, password);
+    } catch (rawErr) {
+      // Re-throw with a normalised message the catch block below can identify
+      const m = rawErr?.message || '';
+      const isParseOrNetwork =
+        m.includes('network_unavailable') ||
+        m.toLowerCase().includes('json') ||
+        m.toLowerCase().includes('unexpected') ||
+        m.toLowerCase().includes('syntaxerror') ||
+        m.toLowerCase().includes('fetch') ||
+        m.toLowerCase().includes('network') ||
+        m.toLowerCase().includes('failed to fetch');
+      throw new Error(isParseOrNetwork ? 'network_unavailable' : m);
+    }
+    const data = loginResult;
+
+    try {
 
       // Verify role
       if (data.user?.role !== 'customer') {
@@ -172,17 +191,24 @@ function attachFormSubmit() {
       setTimeout(() => redirectAfterLogin('customer'), 800);
 
     } catch (err) {
-      // Distinguish error types
       const msg = err.message || '';
+      const isNetworkError =
+        msg.includes('network_unavailable') ||
+        msg.toLowerCase().includes('fetch') ||
+        msg.toLowerCase().includes('network') ||
+        msg.toLowerCase().includes('json') ||
+        msg.toLowerCase().includes('unexpected') ||
+        msg.toLowerCase().includes('end of json') ||
+        msg.toLowerCase().includes('syntaxerror');
 
       if (msg.toLowerCase().includes('artisan')) {
+        // Wrong portal — show specific error, do NOT fall into demo mode
         showGlobalError(msg);
-      } else if (msg.toLowerCase().includes('network') || msg.toLowerCase().includes('fetch')) {
-        // Demo mode — allow login in dev without backend
+      } else if (isNetworkError) {
+        // Backend not running — use demo mode so the project can be demonstrated
         handleDemoLogin(email);
       } else {
         showGlobalError('Incorrect email or password. Please check and try again.');
-        // Shake password field
         const pwField = document.getElementById('field-password');
         pwField?.classList.add('field-error');
         document.getElementById('error-password').textContent = '';

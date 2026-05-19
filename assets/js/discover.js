@@ -422,6 +422,42 @@ function renderList() {
   });
 }
 
+// ── PAGINATION CONTROLS
+function updatePagination() {
+  const total  = state.filtered.length;
+  const shown  = Math.min(state.page * PAGE_SIZE, total);
+  const pgWrap = document.getElementById('list-pagination');
+  const pgInfo = document.getElementById('pg-info');
+  const pgBtn  = document.getElementById('pg-load-more');
+  const pgEnd  = document.getElementById('pg-end');
+  if (!pgWrap) return;
+
+  if (total === 0) { pgWrap.style.display = 'none'; return; }
+
+  pgWrap.style.display = 'flex';
+  pgInfo.textContent   = `Showing ${shown} of ${total} artisan${total !== 1 ? 's' : ''}`;
+
+  if (shown >= total) {
+    pgBtn.style.display = 'none';
+    pgEnd.style.display = 'flex';
+  } else {v 
+    pgBtn.style.display = 'flex';
+    pgEnd.style.display = 'none';
+  }
+}
+
+function loadMore() {
+  const listEl    = document.getElementById('artisan-list');
+  const prevCount = listEl.querySelectorAll('.a-card').length;
+  state.page += 1;
+  renderList();
+  // Scroll to first newly loaded card
+  const allCards = listEl.querySelectorAll('.a-card');
+  if (allCards[prevCount]) {
+    allCards[prevCount].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
 // ── UPDATE RESULTS SUMMARY
 function updateResultsSummary() {
   const count = state.filtered.length;

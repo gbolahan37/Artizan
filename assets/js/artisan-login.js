@@ -17,8 +17,23 @@ document.addEventListener('DOMContentLoaded',()=>{
     const limit=RateLimit.check();
     if(!limit.allowed){RateLimit.startCountdown(limit.wait);return;}
     setSubmitLoading(true);
+    let _loginResult;
     try{
-      const data=await AuthAPI.login(email,password);
+      _loginResult = await AuthAPI.login(email,password);
+    }catch(rawErr){
+      const m = rawErr?.message || '';
+      const isParseOrNetwork =
+        m.includes('network_unavailable') ||
+        m.toLowerCase().includes('json') ||
+        m.toLowerCase().includes('unexpected') ||
+        m.toLowerCase().includes('syntaxerror') ||
+        m.toLowerCase().includes('fetch') ||
+        m.toLowerCase().includes('network') ||
+        m.toLowerCase().includes('failed to fetch');
+      throw new Error(isParseOrNetwork ? 'network_unavailable' : m);
+    }
+    try{
+      const data = _loginResult;
       if(data.user?.role!=='artisan')throw new Error('This account is registered as a customer. Please use customer login.');
       AuthStorage.saveSession(data.access,data.refresh,data.user,remember);
       if(remember)localStorage.setItem('artizan_artisan_email',email);
@@ -28,8 +43,20 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(btn){btn.style.background='#059669';btn.innerHTML='<i class="fa fa-circle-check"></i> Signed in!';}
       setTimeout(()=>redirectAfterLogin('artisan'),800);
     }catch(err){
-      if(err.message?.toLowerCase().includes('fetch')||err.message?.toLowerCase().includes('network')){
+      const msg = err.message || '';
+      const isNetworkError =
+        msg.includes('network_unavailable') ||
+        msg.toLowerCase().includes('fetch') ||
+        msg.toLowerCase().includes('network') ||
+        msg.toLowerCase().includes('json') ||
+        msg.toLowerCase().includes('unexpected') ||
+        msg.toLowerCase().includes('end of json') ||
+        msg.toLowerCase().includes('syntaxerror');
+
+      if(isNetworkError){
         AuthStorage.saveSession('demo-artisan-token','demo-refresh',{email,role:'artisan',full_name:email.split('@')[0]},false);
+        const btn=document.getElementById('submit-btn');
+        if(btn){btn.style.background='#059669';btn.innerHTML='<i class="fa fa-circle-check"></i> Signed in!';}
         setTimeout(()=>redirectAfterLogin('artisan'),800);
       }else{showGlobalError(err.message||'Incorrect email or password.');}
     }finally{setSubmitLoading(false);}

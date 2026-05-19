@@ -316,6 +316,25 @@
         </div>
       </div>
 
+
+      <!-- Earnings Chart -->
+      <div class="section-block earnings-chart-block">
+        <div class="section-block-header">
+          <h3 class="section-block-title">Earnings over time</h3>
+          <div class="chart-period-tabs">
+            <button class="chart-tab active" data-period="weekly">Weekly</button>
+            <button class="chart-tab" data-period="monthly">Monthly</button>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="earnings-chart" aria-label="Earnings bar chart" role="img"></canvas>
+        </div>
+        <div class="chart-legend">
+          <span class="chart-legend-dot"></span>
+          <span class="chart-legend-label" id="chart-legend-label">Earnings per week (₦)</span>
+        </div>
+      </div>
+
       <!-- Withdraw form -->
       <div class="withdraw-form">
         <h4><i class="fa fa-building-columns" style="margin-right:8px;color:var(--brand-green)"></i>Available balance: <span id="avail-balance">₦12,500</span></h4>
@@ -468,6 +487,89 @@
         </form>
       </div>
     </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PROOF PHOTO MODAL
+     Shown when artisan clicks "Mark Done"
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="proof-modal" style="display:none">
+  <div class="modal-box proof-modal-box">
+
+    <button class="modal-close-btn" id="proof-modal-close">
+      <i class="fa fa-xmark"></i>
+    </button>
+
+    <!-- Step 1: Upload -->
+    <div id="proof-step1">
+      <div class="modal-icon" style="background:#ECFDF5;color:#059669">
+        <i class="fa fa-camera"></i>
+      </div>
+      <h3 class="modal-title">Mark job as complete</h3>
+      <p class="modal-sub">Upload a proof photo to show the customer the finished work. This protects you in case of any dispute.</p>
+
+      <!-- Drop zone -->
+      <div class="proof-dropzone" id="proof-dropzone">
+        <input type="file" id="proof-file-input" accept="image/*" style="display:none"/>
+        <div class="proof-dz-empty" id="proof-dz-empty">
+          <div class="proof-dz-icon"><i class="fa fa-cloud-arrow-up"></i></div>
+          <p class="proof-dz-title">Tap to upload a photo</p>
+          <p class="proof-dz-sub">JPG, PNG or WEBP · Max 5MB</p>
+        </div>
+        <div class="proof-dz-preview" id="proof-dz-preview" style="display:none">
+          <img id="proof-preview-img" src="" alt="Proof photo preview"/>
+          <button class="proof-remove-btn" id="proof-remove-btn" type="button">
+            <i class="fa fa-xmark"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <!-- Optional caption -->
+      <div class="proof-caption-wrap">
+        <label class="proof-caption-label">
+          Add a note <span style="font-weight:400;color:var(--text-muted)">(optional)</span>
+        </label>
+        <textarea
+          id="proof-caption"
+          class="proof-caption-input"
+          rows="2"
+          placeholder="e.g. Replaced burst pipe under kitchen sink. All fittings sealed and tested."
+        ></textarea>
+      </div>
+
+      <p class="proof-skip-note" id="proof-skip-note">
+        <i class="fa fa-circle-info"></i>
+        Photo is optional — you can mark complete without one.
+      </p>
+
+      <div class="proof-error" id="proof-error"></div>
+
+      <div class="modal-actions" style="margin-top:20px">
+        <button class="confirm-yes-btn proof-submit-btn" id="proof-submit" style="background:var(--brand-green)">
+          <i class="fa fa-flag-checkered"></i> Mark Complete
+        </button>
+        <button class="confirm-no-btn" id="proof-cancel">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Success state -->
+    <div id="proof-step2" style="display:none">
+      <div class="modal-icon" style="background:#ECFDF5;color:#059669">
+        <i class="fa fa-circle-check"></i>
+      </div>
+      <h3 class="modal-title">Job marked complete!</h3>
+      <p class="modal-sub" id="proof-success-msg">
+        The customer has been notified. Payment will be released from escrow once they confirm.
+      </p>
+      <div class="proof-success-photo" id="proof-success-photo" style="display:none">
+        <img id="proof-success-img" src="" alt=""/>
+      </div>
+      <button class="confirm-yes-btn" id="proof-done-btn" style="background:var(--brand-green);width:100%;margin-top:20px">
+        Done
+      </button>
+    </div>
 
   </div>
 </div>

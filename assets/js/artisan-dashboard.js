@@ -727,6 +727,95 @@ function renderEarnings() {
     : emptyState('fa-naira-sign', 'No earnings yet', 'Completed jobs will appear here.');
 }
 
+function drawEarningsChart(period, weeklyLabels, weeklyData, monthlyLabels, monthlyData) {
+  const canvas = document.getElementById('earnings-chart');
+  if (!canvas) return;
+
+  // Destroy previous instance to avoid memory leak and double-render
+  if (_earningsChart) {
+    _earningsChart.destroy();
+    _earningsChart = null;
+  }
+
+  const isWeekly  = period === 'weekly';
+  const labels    = isWeekly ? weeklyLabels  : monthlyLabels;
+  const data      = isWeekly ? weeklyData    : monthlyData;
+  const maxVal    = Math.max(...data);
+  const legendEl  = document.getElementById('chart-legend-label');
+  if (legendEl) legendEl.textContent = isWeekly ? 'Earnings per week (₦)' : 'Earnings per month (₦)';
+
+  // Read CSS variable colours so chart respects the design system
+  const style      = getComputedStyle(document.documentElement);
+  const green      = style.getPropertyValue('--brand-green').trim()      || '#059669';
+  const greenLight = style.getPropertyValue('--brand-green-light').trim()|| '#ECFDF5';
+  const textMuted  = style.getPropertyValue('--text-muted').trim()       || '#9ca3af';
+  const border     = style.getPropertyValue('--border').trim()           || '#e5e7eb';
+
+  _earningsChart = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: isWeekly ? 'Weekly earnings (₦)' : 'Monthly earnings (₦)',
+        data,
+        backgroundColor: data.map(v =>
+          v === maxVal
+            ? green                          // highlight the peak bar
+            : (greenLight || '#ECFDF5')
+        ),
+        borderColor: data.map(v =>
+          v === maxVal ? green : '#6EE7B7'
+        ),
+        borderWidth: 1.5,
+        borderRadius: 8,
+        borderSkipped: false,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 500, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#111827',
+          titleColor: '#fff',
+          bodyColor: '#d1d5db',
+          padding: 10,
+          cornerRadius: 8,
+          callbacks: {
+            label: ctx => '  ₦' + ctx.parsed.y.toLocaleString(),
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: {
+            color: textMuted,
+            font: { size: 11, family: "'DM Sans', sans-serif" },
+          },
+        },
+        y: {
+          grid: {
+            color: border,
+            drawBorder: false,
+          },
+          border: { display: false, dash: [4, 4] },
+          ticks: {
+            color: textMuted,
+            font: { size: 11, family: "'DM Sans', sans-serif" },
+            callback: v => '₦' + (v >= 1000 ? (v/1000).toFixed(0) + 'k' : v),
+            maxTicksLimit: 5,
+          },
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
 //   PORTFOLIO
 function renderPortfolio() {
   const max    = 10;
@@ -886,6 +975,171 @@ function renderNotifications() {
       <div class="notif-time">${n.time}</div>
     </div>
   `).join('');
+}
+
+// ══════════════════════════════════════════
+//   PROOF PHOTO MODAL
+// ══════════════════════════════════════════
+let _proofJob        = null;
+let _proofFileData   = null; // base64 data URL of chosen photo
+
+function openProofModal(job) {
+  _proofJob      = job;
+  _proofFileData = null;
+
+  // Reset to step 1
+  document.getElementById('proof-step1').style.display = 'block';
+  document.getElementById('proof-step2').style.display = 'none';
+  document.getElementById('proof-dz-empty').style.display   = 'flex';
+  document.getElementById('proof-dz-preview').style.display = 'none';
+  document.getElementById('proof-caption').value = '';
+  document.getElementById('proof-error').textContent = '';
+  document.getElementById('proof-file-input').value = '';
+
+  document.getElementById('proof-modal').style.display = 'flex';
+}
+
+function initProofModal() {
+  const modal      = document.getElementById('proof-modal');
+  const fileInput  = document.getElementById('proof-file-input');
+  const dropzone   = document.getElementById('proof-dropzone');
+  const dzEmpty    = document.getElementById('proof-dz-empty');
+  const dzPreview  = document.getElementById('proof-dz-preview');
+  const previewImg = document.getElementById('proof-preview-img');
+  const removeBtn  = document.getElementById('proof-remove-btn');
+  const submitBtn  = document.getElementById('proof-submit');
+  const cancelBtn  = document.getElementById('proof-cancel');
+  const closeBtn   = document.getElementById('proof-modal-close');
+  const errorEl    = document.getElementById('proof-error');
+  const doneBtn    = document.getElementById('proof-done-btn');
+
+  // ── Open file picker when dropzone is clicked
+  dropzone.addEventListener('click', (e) => {
+    if (e.target === removeBtn || removeBtn.contains(e.target)) return;
+    fileInput.click();
+  });
+
+  // ── Drag & drop support
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.classList.add('proof-dz-hover');
+  });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('proof-dz-hover'));
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('proof-dz-hover');
+    const file = e.dataTransfer.files[0];
+    if (file) handleProofFile(file);
+  });
+
+  // ── File chosen via input
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (file) handleProofFile(file);
+  });
+
+  // ── Remove photo
+  removeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    _proofFileData = null;
+    fileInput.value = '';
+    dzEmpty.style.display   = 'flex';
+    dzPreview.style.display = 'none';
+    errorEl.textContent = '';
+  });
+
+  // ── Submit
+  submitBtn.addEventListener('click', async () => {
+    if (!_proofJob) return;
+    errorEl.textContent = '';
+
+    // Validate file size (already checked in handleProofFile but double-check)
+    if (_proofFileData && _proofFileData.length > 7_000_000) {
+      errorEl.textContent = 'Photo is too large. Please choose an image under 5MB.';
+      return;
+    }
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Uploading…';
+
+    // Simulate upload delay (replace with real API.uploadJobProof() call)
+    await new Promise(r => setTimeout(r, _proofFileData ? 1200 : 400));
+
+    // Mark job complete in state
+    _proofJob.status     = 'completed';
+    _proofJob.proofPhoto = _proofFileData || null;
+    _proofJob.proofNote  = document.getElementById('proof-caption').value.trim();
+
+    // Reset button
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fa fa-flag-checkered"></i> Mark Complete';
+
+    // Show success step
+    document.getElementById('proof-step1').style.display = 'none';
+    document.getElementById('proof-step2').style.display = 'block';
+
+    const amt = (_proofJob.agreedAmount || _proofJob.amount).toLocaleString();
+    document.getElementById('proof-success-msg').textContent =
+      `The customer has been notified. Payment of ₦${amt} will be released from escrow once they confirm.`;
+
+    // Show proof thumbnail on success screen if photo was uploaded
+    const successPhoto = document.getElementById('proof-success-photo');
+    const successImg   = document.getElementById('proof-success-img');
+    if (_proofFileData) {
+      successImg.src              = _proofFileData;
+      successPhoto.style.display  = 'block';
+    } else {
+      successPhoto.style.display  = 'none';
+    }
+
+    // Refresh dashboard in background
+    refreshAll();
+  });
+
+  // ── Done button (closes modal after success)
+  doneBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    showToast(
+      `Job completed! Payment of ₦${((_proofJob?.agreedAmount || _proofJob?.amount) || 0).toLocaleString()} will be released.`,
+      'fa-circle-check'
+    );
+    _proofJob = null;
+  });
+
+  // ── Cancel / close
+  const closeModal = () => { modal.style.display = 'none'; _proofJob = null; };
+  cancelBtn.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click',  closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+}
+
+function handleProofFile(file) {
+  const errorEl = document.getElementById('proof-error');
+  errorEl.textContent = '';
+
+  // Validate type
+  const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+  if (!allowed.includes(file.type)) {
+    errorEl.textContent = 'Only JPG, PNG, or WEBP images are allowed.';
+    return;
+  }
+
+  // Validate size (5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    errorEl.textContent = 'File is too large. Maximum size is 5MB.';
+    return;
+  }
+
+  // Read and display preview
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    _proofFileData = e.target.result;
+    document.getElementById('proof-preview-img').src = _proofFileData;
+    document.getElementById('proof-dz-empty').style.display   = 'none';
+    document.getElementById('proof-dz-preview').style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
 }
 
 //   CONFIRM MODAL

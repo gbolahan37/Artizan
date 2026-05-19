@@ -290,15 +290,18 @@ async function submitRegistration(idFile) {
 
   } catch (err) {
     // Demo mode fallback when backend not live
-    const isDemoError = err.message?.toLowerCase().includes('fetch') ||
+    const isDemoError = err.message?.includes('network_unavailable') ||
+                        err.message?.toLowerCase().includes('fetch') ||
                         err.message?.toLowerCase().includes('network') ||
+                        err.message?.toLowerCase().includes('json') ||
+                        err.message?.toLowerCase().includes('unexpected') ||
                         err.message?.toLowerCase().includes('failed');
 
     if (isDemoError) {
       AuthStorage.saveSession(
         'demo-artisan-token',
         'demo-artisan-refresh',
-        { ...stepData, id: 'demo-artisan-001', kyc_status: 'submitted' },
+        { ...stepData, role: 'artisan', id: 'demo-artisan-001', kyc_status: 'submitted' },
         false
       );
       goToStep(5);
