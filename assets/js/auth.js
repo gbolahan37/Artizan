@@ -267,24 +267,40 @@ window.AuthAPI = {
   base: '/api',
 
   async login(email, password) {
-    const res = await fetch(`${this.base}/auth/login/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
+    let res;
+    try {
+      res = await fetch(`${this.base}/auth/login/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+    } catch (_) {
+      throw new Error('network_unavailable');
+    }
+    let data;
+    try { data = await res.json(); } catch (_) {
+      throw new Error('network_unavailable');
+    }
     if (!res.ok) throw new Error(data.detail || data.message || 'Login failed.');
     return data;
   },
 
   async register(payload) {
     const formData = payload instanceof FormData ? payload : null;
-    const res = await fetch(`${this.base}/auth/register/`, {
-      method: 'POST',
-      headers: formData ? {} : { 'Content-Type': 'application/json' },
-      body: formData || JSON.stringify(payload),
-    });
-    const data = await res.json();
+    let res;
+    try {
+      res = await fetch(`${this.base}/auth/register/`, {
+        method: 'POST',
+        headers: formData ? {} : { 'Content-Type': 'application/json' },
+        body: formData || JSON.stringify(payload),
+      });
+    } catch (_) {
+      throw new Error('network_unavailable');
+    }
+    let data;
+    try { data = await res.json(); } catch (_) {
+      throw new Error('network_unavailable');
+    }
     if (!res.ok) throw new Error(data.detail || data.email?.[0] || data.phone_number?.[0] || 'Registration failed.');
     return data;
   },
@@ -292,8 +308,19 @@ window.AuthAPI = {
 
 // ── SHARED: Redirect after login based on role
 window.redirectAfterLogin = function (role) {
-  const returnUrl = new URLSearchParams(window.location.search).get('next');
-  if (returnUrl) { window.location.href = returnUrl; return; }
+  // 1. ?next= query param
+  const nextParam = new URLSearchParams(window.location.search).get('next');
+  if (nextParam) { window.location.href = nextParam; return; }
+
+  // 2. sessionStorage redirect saved by the dashboard auth guard
+  const savedRedirect = sessionStorage.getItem('artizan_redirect');
+  if (savedRedirect) {
+    sessionStorage.removeItem('artizan_redirect');
+    window.location.href = savedRedirect;
+    return;
+  }
+
+  // 3. Default — correct dashboard for their role
   window.location.href = role === 'artisan' ? 'artisan-dashboard.html' : 'customer-dashboard.html';
 };
 

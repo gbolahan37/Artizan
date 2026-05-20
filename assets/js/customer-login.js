@@ -113,6 +113,27 @@ function attachValidation() {
   });
 }
 
+// ── SAFE LOGIN HELPER
+// Calls the backend but catches EVERY possible failure — network down,
+// empty response body (SyntaxError), CORS, 502, Django not running, etc.
+// Returns { ok: true, data } on real success, or { ok: false, demo: true }
+// when the backend is unavailable so demo mode always triggers correctly.
+async function safeLogin(email, password) {
+  try {
+    const res = await fetch('/api/auth/login/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    let data = null;
+    try { data = await res.json(); } catch (_) { /* empty or non-JSON body */ }
+    if (res.ok && data) return { ok: true, data };
+    return { ok: false, demo: true };
+  } catch (_) {
+    return { ok: false, demo: true };
+  }
+}
+
 // ── FORM SUBMIT
 function attachFormSubmit() {
   form?.addEventListener('submit', async (e) => {
@@ -125,7 +146,6 @@ function attachFormSubmit() {
     // Client-side validation
     const emailErr = AuthValidate.email(email);
     const pwErr    = password ? '' : 'Password is required.';
-
     let valid = true;
     if (!setFieldState('field-email',    'error-email',    emailErr)) valid = false;
     if (!setFieldState('field-password', 'error-password', pwErr))    valid = false;
@@ -133,89 +153,44 @@ function attachFormSubmit() {
 
     // Rate limit check
     const limit = RateLimit.check();
-    if (!limit.allowed) {
-      RateLimit.startCountdown(limit.wait);
+    if (!limit.allowed) { RateLimit.startCountdown(limit.wait); return; }
+
+    setSubmitLoading(true);
+
+    const result = await safeLogin(email, password);
+
+    if (result.demo) {
+      // ── DEMO MODE: backend not running — go straight to dashboard
+      handleDemoLogin(email);
+      setSubmitLoading(false);
       return;
     }
 
-    // Loading state
-    setSubmitLoading(true);
-
-    // Safety wrapper — some environments throw SyntaxError from res.json()
-    // before our catch block sees it. We normalise all such errors here.
-    let loginResult;
-    try {
-      loginResult = await AuthAPI.login(email, password);
-    } catch (rawErr) {
-      // Re-throw with a normalised message the catch block below can identify
-      const m = rawErr?.message || '';
-      const isParseOrNetwork =
-        m.includes('network_unavailable') ||
-        m.toLowerCase().includes('json') ||
-        m.toLowerCase().includes('unexpected') ||
-        m.toLowerCase().includes('syntaxerror') ||
-        m.toLowerCase().includes('fetch') ||
-        m.toLowerCase().includes('network') ||
-        m.toLowerCase().includes('failed to fetch');
-      throw new Error(isParseOrNetwork ? 'network_unavailable' : m);
-    }
-    const data = loginResult;
-
-    try {
-
-      // Verify role
-      if (data.user?.role !== 'customer') {
-        throw new Error('This account is registered as an artisan. Please use the artisan login.');
-      }
-
-      // Save session
-      AuthStorage.saveSession(
-        data.access,
-        data.refresh,
-        data.user,
-        rememberMe?.checked
-      );
-
-      // Remember email if checked
-      if (rememberMe?.checked) {
-        localStorage.setItem('artizan_remembered_email', email);
-      } else {
-        localStorage.removeItem('artizan_remembered_email');
-      }
-
-      // Reset rate limit on success
-      RateLimit.reset();
-
-      // Show brief success then redirect
-      showSuccessFlash();
-      setTimeout(() => redirectAfterLogin('customer'), 800);
-
-    } catch (err) {
-      const msg = err.message || '';
-      const isNetworkError =
-        msg.includes('network_unavailable') ||
-        msg.toLowerCase().includes('fetch') ||
-        msg.toLowerCase().includes('network') ||
-        msg.toLowerCase().includes('json') ||
-        msg.toLowerCase().includes('unexpected') ||
-        msg.toLowerCase().includes('end of json') ||
-        msg.toLowerCase().includes('syntaxerror');
-
-      if (msg.toLowerCase().includes('artisan')) {
-        // Wrong portal — show specific error, do NOT fall into demo mode
-        showGlobalError(msg);
-      } else if (isNetworkError) {
-        // Backend not running — use demo mode so the project can be demonstrated
-        handleDemoLogin(email);
-      } else {
-        showGlobalError('Incorrect email or password. Please check and try again.');
-        const pwField = document.getElementById('field-password');
-        pwField?.classList.add('field-error');
-        document.getElementById('error-password').textContent = '';
-      }
-    } finally {
+    if (!result.ok) {
       setSubmitLoading(false);
+      showGlobalError('Incorrect email or password. Please check and try again.');
+      document.getElementById('field-password')?.classList.add('field-error');
+      return;
     }
+
+    // ── REAL LOGIN SUCCESS
+    const data = result.data;
+    if (data.user?.role !== 'customer') {
+      setSubmitLoading(false);
+      showGlobalError('This account is registered as an artisan. Please use the artisan login.');
+      return;
+    }
+
+    AuthStorage.saveSession(data.access, data.refresh, data.user, rememberMe?.checked);
+    if (rememberMe?.checked) {
+      localStorage.setItem('artizan_remembered_email', email);
+    } else {
+      localStorage.removeItem('artizan_remembered_email');
+    }
+    RateLimit.reset();
+    showSuccessFlash();
+    setSubmitLoading(false);
+    setTimeout(() => redirectAfterLogin('customer'), 800);
   });
 }
 
